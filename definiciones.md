@@ -42,7 +42,28 @@ $$x_k := \frac{1}{\sqrt{N}} \sum_{n=0}^{N-1} X_n W_N^{-kn}$$
 para $0 \leq k < N$.
 :::
 
-Dejaremos para más adelante comprobar que, en efecto, $\operatorname{UDT}$ y $\operatorname{UDT}^{-1}$ definen isometrías con la norma $\| \cdot \|_2$.
+Dejaremos para más adelante comprobar que, en efecto, $\operatorname{UDT}$ y $\operatorname{UDT}^{-1}$ definen isometrías con la norma $\| \cdot \|_2$. TODO: mover proposición.
+
+:::{.proposition #prop:isom}
+Dada una secuencia $\{x\}=x_0, \dots, x_{N-1}$, se verifica $\| \mathcal{F}\{x\} \|_2 = \| \mathcal{F}^{-1}\{x\} \| = \|\{x\}\|$.
+:::
+:::{.proof}
+Basta comprobar que
+
+$$\begin{split}
+\| \mathcal{F}\{x\} \|_2^2 & = \sum_{k=0}^{N-1} \left| \frac{1}{\sqrt{N}} \sum_{n=0}^{N-1} x_n W_N^{kn} \right|^2 = \sum_{k=0}^{N-1} \frac{1}{N} \left| \sum_{n=0}^{N-1} x_n W_N^{kn} \right|^2 \\
+& = \frac{1}{N} \sum_{k=0}^{N-1} \left| \sum_{n=0}^{N-1} x_n W_N^{kn} \right|^2 = \sum_{k=0}^{N-1} \sum_{n=0}^{N-1} \left| x_n W_N^{kn} \right|^2 \\
+& = \frac{1}{N} \sum_{k=0}^{N-1} \sum_{n=0}^{N-1} \left| x_n \right|^2 = \frac{1}{N} \sum_{n=0}^{N-1} \sum_{k=0}^{N-1} \left| x_n \right|^2 \\
+& = \frac{1}{N} \sum_{n=0}^{N-1} N \left| x_n \right|^2 = \sum_{n=0}^{N-1} \left| x_n \right|^2 = \| \{x\}\|
+\end{split}$$
+y
+$$\begin{split}
+\| \mathcal{F}^{-1}\{x\} \|_2^2 & = \sum_{k=0}^{N-1} \left| \frac{1}{\sqrt{N}} \sum_{n=0}^{N-1} x_n W_N^{-kn} \right|^2 = \sum_{k=0}^{N-1} \frac{1}{N} \left| \sum_{n=0}^{N-1} x_n W_N^{-kn} \right|^2 \\
+& = \frac{1}{N} \sum_{k=0}^{N-1} \left| \sum_{n=0}^{N-1} x_n W_N^{-kn} \right|^2 = \sum_{k=0}^{N-1} \sum_{n=0}^{N-1} \left| x_n W_N^{-kn} \right|^2 \\
+& = \frac{1}{N} \sum_{k=0}^{N-1} \sum_{n=0}^{N-1} \left| x_n \right|^2 = \frac{1}{N} \sum_{n=0}^{N-1} \sum_{k=0}^{N-1} \left| x_n \right|^2 \\
+& = \frac{1}{N} \sum_{n=0}^{N-1} N \left| x_n \right|^2 = \sum_{n=0}^{N-1} \left| x_n \right|^2 = \| \{x\}\|
+\end{split}$$
+:::
 
 ## DFT multidimensional
 
