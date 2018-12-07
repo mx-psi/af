@@ -6,6 +6,7 @@ La computación cuántica es el estudio de un nuevo tipo de ordenador que utiliz
 Aunque su implementación física a gran escala no es todavía una realidad, desde los años 80 [@deutsch1985quantum] existe un campo que investiga de forma teórica qué problemas pueden resolverse de forma eficiente en estos ordenadores.
 
 Entre los problemas para los que existen algoritmos eficientes está el cálculo de la transformada de Fourier cuántica, una versión unitaria de la transformada de Fourier discreta para la que conocemos un algoritmo cuántico mucho más eficiente que cualquier algoritmo de transformada de Fourier rápida conocido.
+Sin embargo este algoritmo está limitado debido a la forma en la que se obtienen los resultados, por lo que el diseño de aplicaciones es complejo.
 
 La aplicación más conocida de la transformada de Fourier cuántica es el algoritmo de Shor[@shor1999polynomial] que permite la factorización de enteros en tiempo polinómico y su generalización en el problema del subgrupo abeliano oculto [@jozsa1998quantum] con otras aplicaciones para la resolución de problemas algebraicos[@hallgren2007polynomial],[@biasse2016efficient].
 
@@ -35,15 +36,12 @@ En computación cuántica nos restringimos a sistemas compuestos por qubits. Est
 ### Sistemas compuestos 
 
 El espacio de estados de un sistema compuesto viene dado por el producto tensorial. 
-Exponemos brevemente la construcción de un espacio de Hilbert a partir del producto tensorial de dos espacios de Hilbert.
+Recordamos en la siguiente proposición la construcción de un espacio de Hilbert a partir del producto tensorial de dos espacios de Hilbert, cuya demostración puede encontrarse en [@weidmann2012linear].
 
 :::{.proposition #prop:hilbert}
 Sean $H_1, H_2$ espacios de Hilbert con bases ortonormales $B_1 = \{u_i\}_{i \in I}, B_2 = \{v_j\}_{j \in J}$. Entonces el producto tensorial de $H_1, H_2$ como espacios vectoriales  tiene estructura de espacio de Hilbert con producto escalar dado por la extensión sesquilineal y continua de
 $$\bk{u \otimes v}{u' \otimes v'} = \bk{u}{u'} \bk{v}{v'}$$
 y $B_1 \otimes B_2 := \{u_i \otimes v_j\}_{(i,j)}$ es una base ortonormal.
-:::
-:::{.proof} 
-TODO (se deja sin demostrar?)
 :::
 
 De esta forma está justificado el siguiente principio:
@@ -153,8 +151,8 @@ En esta sección definimos la transformada de Fourier cuántica y vemos cómo ca
 
 :::{.definition}
 Sea $$\ket{\phi} = \sum_{k = 0}^{N-1} c_k\ket{k}$$ un estado cuántico de un sistema compuesto.
-Su *transformada de Fourier cuántica* es el estado cuántico que surge de la aplicación de la transformada discreta de Fourier normalizada (TODO cita) a su vector de coordenadas:
-$$\ket{\operatorname{DFT}(\phi)} = \sum_{j = 0}^{N-1} (\operatorname{DFT} c)_j\ket{j}$$ <!--TODO notación-->
+Su *transformada de Fourier cuántica* es el estado cuántico que surge de la aplicación de la transformada discreta de Fourier normalizada ([@dfn:udt]) a su vector de coordenadas:
+$$\ket{\operatorname{UDT}(\phi)} = \sum_{j = 0}^{N-1} (\operatorname{UDT} c)_j\ket{j}$$
 :::
 
 El principal resultado de esta sección es:
@@ -163,7 +161,9 @@ El principal resultado de esta sección es:
 Existe una familia polinomial uniforme de circuitos cuánticos cuya salida para cada estado cuántico es su transformada de Fourier cuántica.
 :::
 :::{.proof}
-TODO falta tener definición y propiedades de DFT
+La demostración viene descrita en [@NielsenQuantumComputationQuantum2010] TODO.
+
+Notamos con $0.j_1\dots j_n$ la representación binaria
 :::
 
 Nótese que no se conoce una forma de aprovechar esta familia de circuitos para el cálculo directo de la transformada discreta de Fourier normalizada (esto es, no sabemos si la transformada discreta de Fourier es calculable en tiempo polinomial cuántico) ya que no podemos observar las amplitudes del estado cuántico.
@@ -190,9 +190,28 @@ Sea $U$ una transformación unitaria con un valor propio $e^{2 \pi i\varphi}$.
 Una aproximación de $n$-bits de $\varphi$ es calculable en tiempo polinomial cuántico ($O(n^2))$.
 :::
 
-:::{.algorithm name="Estimación de fase"}
-TODO
+:::{.algorithm #algo:phase name="Estimación de fase"}
+
+$\;$
+
+Entrada
+: Una operación unitaria que realiza la operación $U^j$-controlada para $j$ entero, un vector propio $\ket{u}$ de $U$ con valor propio $e^{2 \pi \varphi_u}$ y $t = n + \lceil \log(2 + \frac{1}{2\varepsilon})\rceil$ qubits inicializados a $\ket{0}$.
+
+Salida
+: Una aproximación de $n$ bits a $\varphi_u$ con probabilidad de éxito $1 - \varepsilon$.
+
+1. El estado inicial es $\ket{0}^{\otimes t} \ket{u}$,
+2. creamos una superposición en los $t$ primeros qubits utilizando puertas de Hadamard, obteniendo el estado
+$$\frac{1}{\sqrt{2^j}}\sum_{j = 0}^{2^t - 1} \ket{j} \ket{u}$$
+3. Aplicamos la operación $U^j$-controlada. Reordenando términos
+$$\frac{1}{\sqrt{2^j}}\sum_{j = 0}^{2^t - 1} e^{2\pi i j \varphi_u}\ket{j} \ket{u},$$
+4. Aplicamos la transformada de Fourier cuántica inversa, obteniendo una aproximación de $\varphi_u$,
+$$\ket{\overset{\sim}{\varphi_u}} \ket{u}$$
+5. Medimos el primer registro.
 :::
+
+No proporcionamos la demostración del lema en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010]. Sin embargo, en el caso de que $\varphi_u = 0,\!\varphi_1\dots \varphi_n$ tenga exactamente $n$ bits notamos que TODO.
+
 
 A partir del [@lemma:phase] probamos que el cálculo de la parte cuántica del algoritmo de Shor puede hacerse en tiempo polinomial cuántico:
 
@@ -204,7 +223,16 @@ El orden de $x$ en el grupo $U(\mathbb{Z}_N)$ es calculable en tiempo polinomial
 Consideramos la aplicación unitaria $U$
 $$\ket{j}\ket{k} \mapsto\ket{j}\ket{x^jk \mod N}$$
 
-TODO
+Sea $r$ el periodo de $x$ ($\mod N$), $0 \leq s\leq r-1$. Puede verificarse que 
+$$\ket{u_s} = \frac{1}{\sqrt{r}} \sum_{k = 0}^{r-1} \exp\left(\frac{-2\pi i s k}{r}\right)\ket{x^k \mod N}$$
+es un vector propio de $U$ con valor propio $\exp(\frac{2 \pi i s}{r})$.
+
+Por tanto, si podemos construir $U$ y $\ket{u_s}$ podremos aplicar el [@algo:phase] para calcular una aproximación a $\frac{s}{r}$, de la que podemos deducir $r$ en tiempo polinomial mediante un algoritmo de fracciones continuas.
+
+El cálculo de $U^{2^j}$ es eficiente mediante exponenciación binaria. Para el cálculo de $\ket{u_s}$ notamos que $$\frac{1}{\sqrt{r}} \sum_{s = 0}^{r-1} \ket{u_s} = \ket{1},$$ luego podemos aplicar el algoritmo sobre esta superposición y obtendremos la fracción $\frac{s}{r}$ para algún $s$.
+
+Combinando estos hechos obtenemos un algoritmo que aproxima $\frac{s}{r}$. 
+Una análisis sencillo nos muestra que utilizando $t = 2\log N + 1 + \lceil \log(2 + \frac{1}{2 \varepsilon})\rceil$ podemos aproximar esta fracción con la precisión suficiente como para recuperar $r$.
 :::
 
 Por último, la parte clásica reduce el problema de factorización al cálculo del orden de un cierto elemento.

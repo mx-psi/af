@@ -26,7 +26,7 @@ para $0 \leq k < N$.
 
 En ocasiones conviene usar versiones de la DFT y la IDFT normalizadas o unitarias, esto es, que definan una isometría. Para ello solo tenemos que multiplicar la DFT y la IDFT por una constante de normalización. De esa manera llegamos a las siguientes definiciones:
 
-:::{.definition}
+:::{.definition #dfn:udt}
 Dada una secuencia $\{x\}=x_0, \dots, x_{N-1}$ de $N$ números complejos, definimos su *transformada discreta de Fourier normalizada* $\operatorname{UDT} \colon \mathbb{C}^N \to \mathbb{C}^N$ como $\operatorname{UDT}\{x\}= X_0, \dots, X_{N-1}$, donde
 
 $$X_k := \frac{1}{\sqrt{N}} \sum_{n=0}^{N-1} x_n W_N^{kn}$$

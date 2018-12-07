@@ -18,6 +18,11 @@ numbersections: true
 linkReferences: true
 toc: true
 prefixes:
+  dfn:
+    ref:
+    - 'definición$\;$'
+    - 'definiciones$\;$'
+    title: Definición
   prop:
     ref:
     - 'prop.$\;$'
@@ -38,6 +43,11 @@ prefixes:
     - 'lema$\;$'
     - 'lemas$\;$'
     title: Lema
+  algo:
+    ref:
+    - 'algoritmo\;$'
+    - 'algoritmos$\;$'
+    title: Algoritmo
 ---
 
 \newpage
