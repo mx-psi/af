@@ -55,3 +55,26 @@ Basta ver que $\|\{x\}\|_2^2 = \frac{1}{N} \langle \{x\}, \{x\}^{\ast} \rangle =
 :::{.corollary}
 $\operatorname{UDT}$ y $\operatorname{UDT}^{-1}$ definen isometrías.
 :::
+
+Para las siguientes propiedades veremos las secuencias $\{x\}$ y $\{X\}$ como $N$-periódica, esto es, $x_{k+N}:=x_k$ y $X_{k+N}:=X_k$ para todo $k$.
+
+:::{.proposition #prop:despcircular name="Teorema de desplazamiento"}
+Definiendo $\operatorname{shift}_h\{x\}:=x_h, x_{h+1}, \dots, x_{h+N-1}$, se verifica
+
+$$\mathcal{F}(\operatorname{shift}_h\{x\})=\{X\} \{W_N^{-hk}\}_{0 \leq k < N}$$
+
+y
+
+$$\mathcal{F}(\{x\} \{W_N^{-hk}\}) = \operatorname{shift}_{-h}\{X\} \text{.}$$
+:::
+:::{.proof}
+Sea $\hat{X}_0, \dots, \hat{X}_{N-1} := \mathcal{F}(\operatorname{shift}_h\{x\})$. Se tiene
+
+$$\hat{X}_k = \sum_{n=0}^{N-1} x_{h+n} W_N^{kn} = \sum_{n=h}^{h+N-1} x_n W_N^{k(n-h)} =  \left(\sum_{n=h}^{h+N-1} x_n W_N^{kn}\right) W_N^{-hk} = X_k W_N^{-hk}$$
+
+para $0 \leq k < N$.
+
+Por otro lado,
+
+$$X_{k-h} = \sum_{n=0}^{N-1} x_n W_N^{k(n-h)} = \sum_{n=0}^{N-1} \left( x_n W_N^{-hk} \right) W_N^{kn} \text{.}$$
+:::
