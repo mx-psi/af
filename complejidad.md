@@ -111,7 +111,7 @@ Por definición,
 $$\omega_{dn}^{dk} = (e^{\frac{2\pi i}{dn}})^{dk} = (e^{\frac{2\pi i k}{n}})^{k} = \omega_{n}^{k}$$
 :::
 
-:::{.lemma name='Lema de Halving'}
+:::{.lemma name='Lema de la mitad'}
 Si $n>0$ es par, entonces los cuadrados de las $n$ raíces complejas $n$-ésimas de la unidad son las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
 :::
 
@@ -144,4 +144,4 @@ así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad
 1. evaluar los puntos $(\omega_{n}^0)^2,(\omega_{n}^1)^2,...,(\omega_{n}^{n-1})^2 (*)$ en los polinomios $A^{[0]}(x),  A^{[1]}(x)$.
 2. combinar los resultados en la expresión $\ref{eqn:def}$.
 
-Por el lema de Halving, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
