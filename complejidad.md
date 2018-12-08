@@ -83,3 +83,60 @@ Los pasos (1) y (3) son lineales y los pasos (2) y (4) son de orden $O(nlgn)$. P
 :::[.theorem #thm:FFT]
 El producto de dos polinomios de grado menor o igual que n representados por sus coeficientes puede ser computado en un tiempo $O(nlgn)$ y la salida vendrá representada por sus coeficientes.
 :::
+
+#### Complejidad de la FFT
+
+Para darle significado al teorema anterior, nos centramos en estudiar cómo usar la FFT en la evaluación e interpolación de polinomios. Introducimos conceptos ya conocidos pero que serán necesarios.
+
+##### Raíces complejas de la unidad
+
+Una raíz n-ésima de la únidad es un número $\omega$ tal que 
+$$\omega^n = 1$$
+Hay exactamente $n$ raíces complejas n-ésimas de la unidad: $e^{\frac{2\pi i k}{n}}. k = 0,1,...,n-1$
+
+:::{.lemma}[Lema de cancelación]
+Para cualesquiera $n \geq 0$, $k \geq 0$, y $d >0$, siendo $\omega_{n} = e^{frac{2\pi i}{n}}$
+$$\omega_{dn}^{dk} = \omega_{n}^{k}$$
+:::
+
+:::{.proof}
+Por definición, 
+$$\omega_{dn}^{dk} = (e^{frac{2\pi i}{dn})^{dk} = (e^{\frac{2\pi i k}{n})^{k} = \omega_{n}^{k}$$
+:::
+
+:::{.lemma}[Lema de Halving]
+Si $n>0$ es par, entonces los cuadrados de las $n$ raíces complejas $n$-ésimas de la unidad son las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+:::
+
+:::{.proof}
+Por el lema de cancelación, sabemos que $(\omega_{n}^{k})^2 = \omega_{n/2}^{k}$ para todo $k$ entero positivo.  Si elevamos al cuadrado cada raíz $n$-ésima de la unidad, entonces se obtiene dos veces cada raíz $(n/2)$-ésima de la unidad, por tanto, $\omega_{n}^{k}$ y $\omega_{n}^{k+n/2}$ tienen la misma raíz.  
+
+Como $\omega_{n}^{n/2} = -1$, entonces $\omega_{n}^{k+n/2} = - \omega_{n}^{k}$ y por tanto 
+$(\omega_{n}^{k+n/2})^{2} = \omega_{n}^{2k}$
+:::
+
+##### La FFT
+
+Nos encontrábamos en la situación de evaluar $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $\omega_{n}^{0}, omega_{n}^{1},...,omega_{n}^{n-1}$. Sin pérdida de generalidad, asumimos que $n$ es potencia de 2 como ya hemos alarado antes. Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,...,n-1$
+$$y_k = A(\omega_{n}^{k}) = \sum_{j=0}^{n-1} a_j \omega_{n}^{kj}$$.  
+
+El vector $y=(y_0,y_1,...,y_{n-1}$ es la DFT del vector de coeficientes $a = (a_0,a_1,...,a_{n-1} (y=DFT_n(a))$.  
+
+Sabiendo eso, usamos FFT para computar DFT_n(a) en tiempo O(nlgn) en vez de O(n^2) con el método directo.  
+La FFT utiliza un método con estrategia dívide y vencerás, de forma que separa los índices pares de los impares y define dos nuevo polinomios de grado menor o igual que $n/2$, a saber:
+
+$$A^{\[0\]}(x) = a_0 + a_2x+ a_4x^2 + ... + a_{n-2} x^{n/2-1},$$
+$$A^{\[1\]}(x) = a_1 + a_3x + a_5x^2 + ... + a_{n-1} x^{n/2-1}.$$
+
+Se sigue que
+
+$$A(x) = A^{\[0\]}(x) + x A^{\[1\]}(x) \label{eqn:def}$$
+
+así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad se reduce a
+
+\begin{enumerate}
+	\item evaluar los puntos $(\omega_{n}^0)^2,(\omega_{n}^1)^2,...,(\omega_{n}^{n-1})^2 (*)$ en los polinomios $A^{\[0\]}(x),  A^{\[1\]}(x)$.
+	\item combinar los resultados en la expresión $\ref{eqn:def} $
+\end{enumerate}
+
+Por el lema de Halving, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{\[0\]}(x)$ y $A^{\[1\]}(x) $ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
