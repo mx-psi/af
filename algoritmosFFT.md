@@ -34,13 +34,7 @@ $$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,...,N/2 -1 \hspace{1cm} 
 
 Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen:
 
-![TODO: cambiar nombre butterfly](./imgs/butterfly.png)
+![Representación de las ecuaciones](./imgs/butterfly.png)
 
-Veamos ahora el algoritmo en pseudocódigo:
 
-![TODO: cambiar nombre recursive-fft](./imgs/rfft.png)
 
-El algoritmo funciona como sigue: Líneas  2-3 representan el caso base de la recursión. La DFT de un elemento es el propio elemento:
-$$y_0 = a_0 \omega_1^0 = a_0$$
-
-Las líneas 6-7 definen los vectores de coeficientes

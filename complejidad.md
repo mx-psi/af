@@ -4,7 +4,7 @@
 
 En esta pequeña introducción se presentan dos formas de representar polinomios: por medio de sus coeficientes y por parejas punto-valor (un punto y su evaluación en el polinomio). Atacaremos el problema de multiplicar polinomios de grado acotado por $n$, consiguiendo, a través de FFT, un algoritmo de orden $O(n \log n)$. El contenido está basado en el capítulo 30 de [@introAlgorithms].
 
-**Nota:** $T(n)$ es $O(f(n)) \Rightleftarrow \exists c \in \mathbb{R}, \exists n_0 \in \mathbb{N}$, tal que $\forall n \geq n_0, T(n) \leq c f(n)$
+**Nota:** $T(n)$ es $O(f(n)) \Leftrightarrow \exists c \in \mathbb{R}, \exists n_0 \in \mathbb{N}$, tal que $\forall n \geq n_0, T(n) \leq c f(n)$
 
 #### Representación mediante coeficientes
 
@@ -145,3 +145,28 @@ así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad
 2. combinar los resultados en la expresión $\ref{eqn:def}$.
 
 Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+
+![Pseudocódigo del algoritmo](./imgs/rfft.png)
+
+El algoritmo funciona como sigue: Líneas  2-3 representan el caso base de la recursión. La DFT de un elemento es el propio elemento:
+$$y_0 = a_0 \omega_1^0 = a_0$$
+
+Las líneas 6-7 definen los vectores de coeficientes de los polinomios $A^{[0]}$ y $A^{[1]}$. Las líneas 4,5 y 13 garantizan que $\omega$ está actualizado de forma que cuando las líneas 11 y 12 se ejecutan, $\omega = \omega_n^k$. Las líneas 8-9 llevan a cabo el $DFT_{n/2}$ recursivo tal que, para $k=0,1,..,n/2-1$,
+$$y_k^{[0]} = A^{[0]}\omega_{n/2}^k$$
+$$y_k^{[1]} = A^{[1]}\omega_{n/2}^k$$
+o, dado que $\omega_{n/2}^k = \omega_{n}^{2k}$ por el lema de cancelación,
+$$y_k^{[0]} = A^{[0]}\omega_{n}^{2k}$$
+$$y_k^{[1]} = A^{[1]}\omega_{n}^{2k}$$
+
+Para $y_0,y_1,...,y_{n/2-1}$, la línea 11 lleva
+$$y_k = y_k^{[0]} + \omega_n^k y_k^{[1]} = A^{[0]}(\omega_n^{2k}) + \omega_n^k A^{[1]}(\omega_n^{2k}) = A(\omega_n^k)$$
+
+Para $y_{n/2},y_{n/2 +1},...,y_{n-1}$, haciendo $k=0,1,...,n/2-1$, la línea 12 genera
+$$y_{k+n/2} = y_k^{[0]}-\omega_n^k y_k^{[1]} = y_k^{[0]} + \omega_n^{k+n/2}y_k^{[1]}=$$
+$$=A^{[0]}(\omega_n^{2k})+\omega_n^{k+n/2}A^{[1]}(\omega_n^{2k}) =
+A^{[0]}(\omega_n^{2k+n})+\omega_n^{k+n/2}A^{[1]}(\omega_n^{2k+n}) = $$
+$$ = A(\omega_n^{k+n/2})$$
+
+Por tanto, el vector $y$ devuelta por *RECURSIVE-FFT* es verdaderamente la DFT del vector $a$.  
+Para determinar el tiempo de ejecución de *RECURSIVE-FFT*, notamos que cada invocación al procedimiento recursivo toma un tiempo de $O(n)$, donde $n$ es la longitud del vector. Por tanto,
+$$T(n) = 2T(n/2)+O(n) = O(n lgn)$$
