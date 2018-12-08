@@ -88,7 +88,7 @@ Como los vectores de estado son vectores unitarios tenemos que la variable aleat
 
 Existen una gran cantidad de operaciones unitarias que se utilizan en computación cuántica; en este trabajo nos restringimos a aquellas que tienen aplicación para el algoritmo de la transformada cuántica de Fourier.
 
-:::{.proposition}
+:::{.proposition #prop:unitary}
 Las siguientes operaciones son unitarias:
 
 1. La identidad $I_n$,
@@ -147,7 +147,7 @@ El concepto de calculabilidad en tiempo polinomial cuántico formaliza qué func
 
 ## Transformada de Fourier cuántica
 
-En esta sección definimos la transformada de Fourier cuántica y vemos cómo calcularla de forma eficiente en ordenadores cuánticos.
+En esta sección definimos la transformada de Fourier cuántica y vemos cómo calcularla de forma eficiente en ordenadores cuánticos. En primer lugar recordamos que, como vimos en la sección [DFT normalizada], la transformada discreta de Fourier normalizada es una transformación unitaria, por lo que tiene sentido considerarla como operación en el contexto de la computación cuántica.
 
 :::{.definition}
 Sea $$\ket{\phi} = \sum_{k = 0}^{N-1} c_k\ket{k}$$ un estado cuántico de un sistema compuesto.
@@ -155,15 +155,26 @@ Su *transformada de Fourier cuántica* es el estado cuántico que surge de la ap
 $$\ket{\operatorname{UDT}(\phi)} = \sum_{j = 0}^{N-1} (\operatorname{UDT} c)_j\ket{j}$$
 :::
 
+Explícitamente, la transformada es la aplicación unitaria que lleva el estado $\ket{j}, j \in {0, \dots, 2^n-1}$ de la base usual en
+$$\ket{j} \mapsto \frac{1}{\sqrt{2^n}} \sum_{k = 0}^{2^n-1} e^{2 \pi i j k/2^n}\ket{k},$$
+o, mediante cálculos sencillos vemos que podemos reescribirla de la siguiente forma, donde $j = j_1 \dots j_n$ es la expresión de $j$ en binario
+$$\ket{j_1 \dots j_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.j_1}\ket{1}\right)\dots \left(\ket{0} + e^{2\pi i 0.j_1\dots j_n}\ket{1}\right)$${#eq:binary}
+
 El principal resultado de esta sección es:
 
 :::{.theorem #thm:dftc}
 Existe una familia polinomial uniforme de circuitos cuánticos cuya salida para cada estado cuántico es su transformada de Fourier cuántica.
 :::
 :::{.proof}
-La demostración viene descrita en [@NielsenQuantumComputationQuantum2010] TODO.
+La demostración está adaptada de [@NielsenQuantumComputationQuantum2010].
 
-Notamos con $0.j_1\dots j_n$ la representación binaria
+Supongamos que la entrada tiene $n$ bits y es de la forma $\ket{j} = \ket{j_1 \dots j_n}$.
+Siguiendo la notación de la [@prop:unitary] notamos para $2 \leq k \leq n$, $R_k := R_{2\pi/2^k}$.
+
+Sea $1 \leq l \leq n$.
+Claramente $$H\ket{j_l} = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.j_l}\ket{1}),$$ ya que $e^{2 \pi 0.j_l} = (-1)^{j_1}$.
+
+
 :::
 
 Nótese que no se conoce una forma de aprovechar esta familia de circuitos para el cálculo directo de la transformada discreta de Fourier normalizada (esto es, no sabemos si la transformada discreta de Fourier es calculable en tiempo polinomial cuántico) ya que no podemos observar las amplitudes del estado cuántico.
@@ -210,7 +221,7 @@ $$\ket{\overset{\sim}{\varphi_u}} \ket{u}$$
 5. Medimos el primer registro.
 :::
 
-No proporcionamos la demostración del lema en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010]. Sin embargo, en el caso de que $\varphi_u = 0,\!\varphi_1\dots \varphi_n$ tenga exactamente $n$ bits notamos que TODO.
+No proporcionamos la demostración del lema en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010]. Sin embargo, en el caso de que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tenga exactamente $n$ bits notamos que a partir de [@eq:binary] TODO.
 
 
 A partir del [@lemma:phase] probamos que el cálculo de la parte cuántica del algoritmo de Shor puede hacerse en tiempo polinomial cuántico:

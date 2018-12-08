@@ -5,7 +5,6 @@ author:
 - Luis Balderas Ruiz
 - Francisco Javier Morales Piqueras
 - José Manuel Muñoz Fuentes
-lang: es
 documentclass: scrartcl
 colorlinks: true
 bibliography: assets/citas.bib
