@@ -1,4 +1,4 @@
-# ALGORITMOS PARA LA FFT
+# Algoritmos para la FFT
 
 ### Algoritmo de Cooley-Tukey
 
@@ -6,16 +6,17 @@ Siguiendo la discusión anterior sobre la complejidad algorítmica de FFT, llega
 
 #### Algoritmo Radio-2 DIT
 
-Es la forma más simple y común del algoeritmo de Cooley-Tukey. Radio-2 DIT descompone un secuencia de N puntos (N potencia de 2) en dos secuencias de longitud N/2 y se obtiene la DFT de los N puntos en términos de las DFTs de las dos subsecuencias. Este proceso se repite recursivamente hasta que se obtienen secuencias de sólamente dos puntos. Aquí se muestra un ejemplo de particionado([@fft-algo]):
+Es la forma más simple y común del algoeritmo de Cooley-Tukey. Radio-2 DIT descompone un secuencia de N puntos (N potencia de 2) en dos secuencias de longitud N/2 y se obtiene la DFT de los N puntos en términos de las DFTs de las dos subsecuencias. Este proceso se repite recursivamente hasta que se obtienen secuencias de sólamente dos puntos. Aquí se muestra un ejemplo de particionado ([@fft-algo]):
 
 ![Pequeña visualización del particionado](./imgs/radix-2DIT.png)
+
 Para $k = 0,1,...,N-1$,
 
-$$X^F(k) = \sum_{n=0}^{N-1} x(n) W_{N}^{nk} = \sum_{n par} x(n) W_{N}^{nk} + \sum_{n impar} x(n) W_{N}^{nk}  = \sum_{r=0}^{N/2-1} x(2r) W_{N}^{2rk} +  \sum_{r=0}^{N/2-1} x(2r+1) W_{N}^{(2r+1)k} = $$ $$ =\sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk}$$
+$$X^F(k) = \sum_{n=0}^{N-1} x(n) W_{N}^{nk} = \sum_{n \text{ par}} x(n) W_{N}^{nk} + \sum_{n \text{ impar}} x(n) W_{N}^{nk}  = \sum_{r=0}^{N/2-1} x(2r) W_{N}^{2rk} +  \sum_{r=0}^{N/2-1} x(2r+1) W_{N}^{(2r+1)k} = $$ $$ =\sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk}$$
 
 Nótese que
 
-$$ W_N^2 =exp[\frac{-j2(2\pi)}{N}] = exp(\frac{-j2\pi}{N/2}) = W_N/2$$
+$$ W_N^2 =\exp\left[\frac{-j2(2\pi)}{N}\right] = \exp\left(\frac{-j2\pi}{N/2}\right) = W_N/2$$
 
 $$X^F(k) = \sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk} = G^F(k) + W_N^k H^F(k), \hspace{1cm} k=0,1,...,N/2 - 1$$
 
@@ -26,18 +27,18 @@ $G^F(k), H^F(k):$ periódicas con periodo N/2.
 
 $$X^F(k) = G^F(k) +  W_N^kH^F(k) \hspace{1cm} k=0,1,..,N/2 -1  \hspace{1cm} (a)$$
 $$X^F(k+N/2) = G^F(k) + W_N^{k+N/2}H^F(k)$$
-$$W_N^{N/2} = exp(-j\pi)=-1$$
+$$W_N^{N/2} = \exp(-j\pi)=-1$$
 
 Como $W_N^{k+N/2} = - W_N^k$, tenemos que
 $$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,...,N/2 -1 \hspace{1cm} (b)$$
 
 Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen:
 
-![butterfly](./imgs/butterfly.png)
+![TODO: cambiar nombre butterfly](./imgs/butterfly.png)
 
 Veamos ahora el algoritmo en pseudocódigo:
 
-![recursive-fft](./imgs/rfft.png)
+![TODO: cambiar nombre recursive-fft](./imgs/rfft.png)
 
 El algoritmo funciona como sigue: Líneas  2-3 representan el caso base de la recursión. La DFT de un elemento es el propio elemento:
 $$y_0 = a_0 \omega_1^0 = a_0$$
