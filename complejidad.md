@@ -1,8 +1,8 @@
-## COMPLEJIDAD ASINTÓTICA
+# COMPLEJIDAD ASINTÓTICA
 
 ### Introducción. Representación de polinomios: Representación mediante coeficientes y representación punto-valor
 
-En esta pequeña introducción se presentan dos formas de representar polinomios: por medio de sus coeficientes y por parejas punto-valor (un punto y su evaluación en el polinomio). Atacaremos el problema de multiplicar polinomios de grado acotado por $n$, consiguiendo, a través de FFT, un algoritmo de orden $O(nlgn)$.  
+En esta pequeña introducción se presentan dos formas de representar polinomios: por medio de sus coeficientes y por parejas punto-valor (un punto y su evaluación en el polinomio). Atacaremos el problema de multiplicar polinomios de grado acotado por $n$, consiguiendo, a través de FFT, un algoritmo de orden $O(nlgn)$. El contenido está basado en el capítulo 30 de [@introAlgorithms]   
 
 #### Representación mediante coeficientes
 
