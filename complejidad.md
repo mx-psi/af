@@ -4,6 +4,8 @@
 
 En esta pequeña introducción se presentan dos formas de representar polinomios: por medio de sus coeficientes y por parejas punto-valor (un punto y su evaluación en el polinomio). Atacaremos el problema de multiplicar polinomios de grado acotado por $n$, consiguiendo, a través de FFT, un algoritmo de orden $O(n \log n)$. El contenido está basado en el capítulo 30 de [@introAlgorithms].
 
+**Nota:** $T(n)$ es $O(f(n)) \Rightleftarrow \exists c \in \mathbb{R}, \exists n_0 \in \mathbb{N}$, tal que $\forall n \geq n_0, T(n) \leq c f(n)$
+
 #### Representación mediante coeficientes
 
 La representación mediante coeficientes de un polinomio $A(x) = \sum_{j=0}^{n-1} a_j x^j$ de grado acotado por $n$ es un vector de coeficientes $a=(a_0,a_1,...,a_{n-1})$. Esta representación es interesante para ciertas operaciones tales como la **evaluación** (mediante la regla de Horner, tomando un tiempo $O(n)$) o la suma de polinomios, ya que si
