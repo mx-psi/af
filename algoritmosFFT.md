@@ -6,7 +6,7 @@ Siguiendo la discusión anterior sobre la complejidad algorítmica de FFT, llega
 
 #### Algoritmo Radio-2 DIT
 
-Es la forma más simple y común del algoritmo de Cooley-Tukey. Radio-2 DIT descompone un secuencia de N puntos (N potencia de 2) en dos secuencias de longitud N/2 y se obtiene la DFT de los N puntos en términos de las DFTs de las dos subsecuencias. Este proceso se repite recursivamente hasta que se obtienen secuencias de sólamente dos puntos. Aquí se muestra un ejemplo de particionado:
+Es la forma más simple y común del algoritmo de Cooley-Tukey. Radio-2 DIT descompone un secuencia de N puntos (N potencia de 2) en dos secuencias de longitud N/2 y se obtiene la DFT de los N puntos en términos de las DFTs de las dos subsecuencias. Este proceso se repite recursivamente hasta que se obtienen secuencias de sólamente dos puntos. Aquí se muestra un ejemplo de particionado([@fft-algo]):
 
 ![Pequeña visualización del particionado](./imgs/radix-2DIT.png)
 Para $k = 0,1,...,N-1$,
@@ -24,10 +24,24 @@ Aquí $X^F(K)$ los N puntos de la DFT de $x(n)$ es expresada en términos de DFT
 $X^F(k):$ es periódica con perido N ($X^F(k) = X^F(k+N)$  
 $G^F(k), H^F(k):$ periódicas con periodo N/2.  
 
-$$X^F(k) = G^F(k) +  W_N^kH^F(k) \hspace{1cm} k=0,1,..,N/2 -1$$
+$$X^F(k) = G^F(k) +  W_N^kH^F(k) \hspace{1cm} k=0,1,..,N/2 -1  \hspace{1cm} (a)$$
 $$X^F(k+N/2) = G^F(k) + W_N^{k+N/2}H^F(k)$$
 $$W_N^{N/2} = exp(-j\pi)=-1$$
 
 Como $W_N^{k+N/2} = - W_N^k$, tenemos que
-$$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,...,N/2 -1$$
+$$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,...,N/2 -1 \hspace{1cm} (b)$$
+
+Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen:
+
+![butterfly](./imgs/butterfly.png)
+
+Veamos ahora el algoritmo en pseudocódigo:
+
+![recursive-fft](./imgs/rfft.png)
+
+El algoritmo funciona como sigue: Líneas  2-3 representan el caso base de la recursión. La DFT de un elemento es el propio elemento:
+$$y_0 = a_0 \omega_1^0 = a_0$$
+
+Las líneas 6-7 definen los vectores de coeficientes
+
  
