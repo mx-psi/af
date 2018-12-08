@@ -18,35 +18,19 @@ linkReferences: true
 toc: true
 prefixes:
   dfn:
-    ref:
-    - 'definición$\;$'
-    - 'definiciones$\;$'
-    title: Definición
+    ref: ['definición','definiciones']
   prop:
-    ref:
-    - 'prop.$\;$'
-    - 'props.$\;$'
-    title: Proposición
-  paso:
-    ref:
-    - 'paso$\;$'
-    - 'pasos$\;$'
-    title: Paso
+    ref: ['prop.','props.']
   thm:
-    ref:
-    - 'teorema$\;$'
-    - 'teoremas$\;$'
-    title: Teorema
+    ref: ['teorema','teoremas']
   lemma:
-    ref:
-    - 'lema$\;$'
-    - 'lemas$\;$'
-    title: Lema
+    ref: ['lema','lemas']
   algo:
-    ref:
-    - 'algoritmo\;$'
-    - 'algoritmos$\;$'
-    title: Algoritmo
+    ref: ['algoritmo','algoritmos']
+  cor:
+    ref: ['corolario','corolarios']
+  paso:
+    ref: ['paso','pasos']
 ---
 
 \newpage

@@ -37,7 +37,7 @@ $$\|\{x\}\|_2 = \frac{1}{N} \|\{X\}\|_2 \text{.}$$
 Basta ver que $\|\{x\}\|_2^2 = \frac{1}{N} \langle \{x\}, \{x\}^{\ast} \rangle = \langle \{X\}, \{X\}^{\ast} \rangle = \frac{1}{N} \|\{X\}\|_2^2$.
 :::
 
-:::{.corollary}
+:::{.corollary #cor:isometries}
 $\operatorname{UDT}$ y $\operatorname{UDT}^{-1}$ definen isometrías.
 :::
 

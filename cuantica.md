@@ -103,6 +103,9 @@ Es trivial comprobando que el producto de la expresión matricial por su adjunta
 Además, a partir de estas operaciones podemos construir otras nuevas operaciones unitarias.
 En concreto necesitaremos dos tipos de operaciones:
 
+:::{.definition #dfn:controlled}
+$\;$
+
 1. Dados dos operadores lineales $A_i : H_i \to H'_i$ ($i = 1,2$) existe una única aplicación lineal $A_1 \otimes A_2 : H_1 \otimes H_2 \to H'_1 \otimes H'_2$ tal que
 $$(A_1 \otimes A_2)(\ket{x} \otimes \ket{y}) = (A_1\ket{x}) \otimes (A_2\ket{y}),$$
 conocida como su *producto tensorial*.
@@ -110,6 +113,7 @@ Si $A_1$y $A_2$ son unitarias también lo será $A_1 \otimes A_2$.
 2. Si $A$ es una operación unitaria podemos definir la operación $A$*-controlada* como la operación unitaria dada por la expresión matricial por bloques
 $$C_A= \left(\begin{array}{c|c} I_2 & 0 \\ \hline 0 & A \end{array} \right), \qquad C_A\ket{0}\ket{x} = \ket{0}\ket{x}, \quad C_A\ket{1}\ket{x} = \ket{1}A\ket{x}$$
 esta operación toma un qubit $\ket{a}$ y aplica de forma condicional la operación $A$ al resto de qubits si $\ket{a} = \ket{1}$ o lo deja igual si $\ket{a} = \ket{0}$.
+:::
 
 Estas operaciones nos permiten componer operaciones unitarias básicas para crear una nueva operación unitaria que actúe sobre un mayor número de qubits.
 
@@ -119,18 +123,20 @@ A partir de este modelo físico que asumimos como dado construimos un modelo de 
 Existen diversos modelos equivalentes que formalizan la noción de un algoritmo cuántico pero en este trabajo nos centramos en el modelo de *circuitos cuánticos*, que es el más utilizado.
 
 :::{.definition}
-Un *circuito cuántico $C$ con $n$ entradas* es una sucesión finita de operaciones cuánticas $\{P_1, \dots, P_k\}$ con expresión matricial de dimensión $2^n \times 2^n$ construidas mediante el producto de elementos del conjunto universal TODO.
+Un *circuito cuántico $C$ con $n$ entradas* es una sucesión finita de pares de operaciones cuánticas sobre 3 qubits de un conjunto universal e índices $\{(P_1, (i^{(1)}_1,i^{(1)}_2, i^{(1)}_3)), \dots, (P_k, (i^{(k)}_1, i^{(k)}_2, i^{(k)}_3))\}$ con $1 \leq i^{(j)}_l \leq n$.
 
-Si $\ket{\psi}$ es un estado cuántico, notamos con $C(\ket{\psi})$ la variable aleatoria resultante de medir el estado cuántico $P_k \dots P_1 \ket{\psi}$ respecto de la base usual.
+Si $\ket{\psi}$ es un estado cuántico, notamos con $C(\ket{\psi})$ la variable aleatoria resultante de medir respecto de la base usual el estado cuántico tras aplicar ordenadamente las puertas cuánticas $P_j$ sobre los qubits $(i^{(j)}_1,i^{(j)}_2, i^{(j)}_3)$ dejando el resto de qubits sin modificar en ese paso.
 :::
+
+Aunque la elección de conjunto universal dará lugar a circuitos cuánticos distintos todos dan lugar a la misma definición de calculabilidad en tiempo polinomial cuántico [@dawson2005solovay].
 
 La noción de familia de circuitos cuánticos nos permite formalizar el cálculo de funciones $f:\{0,1\}^\ast \to \{0,1\}^\ast$. Como las mediciones son probabilísticas el resultado del cálculo por parte de una familia de circuitos cuánticos será, en general, no determinista, lo que formaliza la siguiente definición.
 
-Para el cálculo de funciones debemos asumir que dada $x \in \{0,1\}^\ast$ arbitraria podemos preparar el estado inicial asociado $\ket{x}$ en como mucho $n = |x|$ pasos.
+Para el cálculo de funciones debemos asumir que dada $x \in \{0,1\}^\ast$ arbitraria podemos preparar el estado inicial asociado $\ket{x}$ en como mucho $n = |x|$ pasos. Incluimos también *qubits ancilla* para cálculos auxiliares.
 
 :::{.definition}
-Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que
-$$P\left[C_n\left(\ket{x}\ket{0}^{\otimes p(n)}\right) = f(x)\ket{0}^{\otimes p(n)}\right] \geq \frac23$$
+Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que 
+$$P\left[C_n\left(\ket{x}\ket{0}^{\otimes p(n)}\right) = f(x)\ket{\psi}\right] \geq \frac23$$
 :::
 
 La constante $\frac23$ es arbitraria; dada una familia de circuitos cuánticos que calcule una función $f$ con probabilidad de éxito no nula podemos calcularla con probabilidad de éxito tan cercana a 1 como queramos sin más que repetir el algoritmo una cantidad constante de veces.
@@ -147,33 +153,43 @@ El concepto de calculabilidad en tiempo polinomial cuántico formaliza qué func
 
 ## Transformada de Fourier cuántica
 
-En esta sección definimos la transformada de Fourier cuántica y vemos cómo calcularla de forma eficiente en ordenadores cuánticos. En primer lugar recordamos que, como vimos en la sección [DFT normalizada], la transformada discreta de Fourier normalizada es una transformación unitaria, por lo que tiene sentido considerarla como operación en el contexto de la computación cuántica.
+En esta sección definimos la transformada de Fourier cuántica y vemos cómo calcularla de forma eficiente en ordenadores cuánticos. En primer lugar recordamos que, como vimos en el [@cor:isometries], la transformada discreta de Fourier normalizada es una transformación unitaria, por lo que tiene sentido considerarla como operación en el contexto de la computación cuántica.
 
 :::{.definition}
 Sea $$\ket{\phi} = \sum_{k = 0}^{N-1} c_k\ket{k}$$ un estado cuántico de un sistema compuesto.
 Su *transformada de Fourier cuántica* es el estado cuántico que surge de la aplicación de la transformada discreta de Fourier normalizada ([@dfn:udt]) a su vector de coordenadas:
-$$\ket{\operatorname{UDT}(\phi)} = \sum_{j = 0}^{N-1} (\operatorname{UDT} c)_j\ket{j}$$
+$$\ket{\operatorname{UDT}(\phi)} = \sum_{x = 0}^{N-1} (\operatorname{UDT} c)_x\ket{x}$$
 :::
 
-Explícitamente, la transformada es la aplicación unitaria que lleva el estado $\ket{j}, j \in {0, \dots, 2^n-1}$ de la base usual en
-$$\ket{j} \mapsto \frac{1}{\sqrt{2^n}} \sum_{k = 0}^{2^n-1} e^{2 \pi i j k/2^n}\ket{k},$$
-o, mediante cálculos sencillos vemos que podemos reescribirla de la siguiente forma, donde $j = j_1 \dots j_n$ es la expresión de $j$ en binario
-$$\ket{j_1 \dots j_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.j_1}\ket{1}\right)\dots\relax \left( \ket{0} + e^{2\pi i 0.j_1\dots j_n}\ket{1} \right)$${#eq:binary}
+Explícitamente, la transformada es la aplicación unitaria que transforma el estado $\ket{x}, x \in \{0, \dots, 2^n-1\}$ de la base usual de la siguiente forma
+$$\ket{x} \mapsto \frac{1}{\sqrt{2^n}} \sum_{k = 0}^{2^n-1} e^{2 \pi i x k/2^n}\ket{k},$$
+o, mediante cálculos sencillos vemos que podemos reescribirla de la siguiente forma, donde $x = x_1 \dots x_n$ es la expresión de $x$ en binario
+\begin{equation}
+\label{eq:binary}
+\ket{x_1 \dots x_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.x_n}\ket{1}\right)\dots \left(\ket{0} + e^{2\pi i 0.x_1\dots x_n}\ket{1}\right)
+\end{equation}
 
 El principal resultado de esta sección es:
 
 :::{.theorem #thm:dftc}
 Existe una familia polinomial uniforme de circuitos cuánticos cuya salida para cada estado cuántico es su transformada de Fourier cuántica.
+
+En concreto, para un estado cuántico de $N = 2^n$ coeficientes complejos el circuito tiene un tamaño de $O(n^2)$, luego su eficiencia es $O(\log^2 N)$.
 :::
 :::{.proof}
 La demostración está adaptada de [@NielsenQuantumComputationQuantum2010].
 
-Supongamos que la entrada tiene $n$ bits y es de la forma $\ket{j} = \ket{j_1 \dots j_n}$.
+Supongamos que la entrada tiene $n$ bits y es de la forma $\ket{x} = \ket{x_1 \dots x_n}$.
 Siguiendo la notación de la [@prop:unitary] notamos para $2 \leq k \leq n$, $R_k := R_{2\pi/2^k}$.
 
-Sea $1 \leq l \leq n$.
-Claramente $$H\ket{j_l} = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.j_l}\ket{1}),$$ ya que $e^{2 \pi 0.j_l} = (-1)^{j_1}$.
+C1aramente $$H\ket{x_1} = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.x_1}\ket{1}),$$ ya que $e^{2 \pi 0.x_1} = (-1)^{x_1}$.
 
+Si aplicamos una puerta $R_2$-controlada ([@dfn:controlled]) respecto de $\ket{x_2}$ tenemos
+$$\operatorname{C-R}_k\ket{x_2}(H\ket{x_1}) = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.x_1x_2}\ket{1})$$
+
+Mediante la aplicación de puertas de Hadamard y puertas $R_k$-controladas podemos obtener un circuito que calcule la transformada de Fourier ([@fig:circuito]) a partir de la [@eq:binary] que necesita un total de $\frac{n(n+1)}{2} \in O(n^2)$ puertas cuánticas.
+
+![Circuito cuántico para el cálculo de la transformada cuántica de Fourier para entrada de $n$-qubits. No se incluyen la reordenación de qubits final[@QFTcircuito].](imgs/Q_fourier_nqubits.png){#fig:circuito}
 
 :::
 
@@ -214,15 +230,18 @@ Salida
 1. El estado inicial es $\ket{0}^{\otimes t} \ket{u}$,
 2. creamos una superposición en los $t$ primeros qubits utilizando puertas de Hadamard, obteniendo el estado
 $$\frac{1}{\sqrt{2^j}}\sum_{j = 0}^{2^t - 1} \ket{j} \ket{u}$$
-3. Aplicamos la operación $U^j$-controlada. Reordenando términos
+3. \label{paso:ucontrolada} Aplicamos la operación $U^j$-controlada. Reordenando términos
 $$\frac{1}{\sqrt{2^j}}\sum_{j = 0}^{2^t - 1} e^{2\pi i j \varphi_u}\ket{j} \ket{u},$$
 4. Aplicamos la transformada de Fourier cuántica inversa, obteniendo una aproximación de $\varphi_u$,
 $$\ket{\overset{\sim}{\varphi_u}} \ket{u}$$
 5. Medimos el primer registro.
 :::
 
-No proporcionamos la demostración del lema en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010]. Sin embargo, en el caso de que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tenga exactamente $n$ bits notamos que a partir de [@eq:binary] TODO.
-
+Supongamos que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tiene exactamente $n$ bits. 
+En tal caso el estado después del [@paso:ucontrolada] es
+$$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2\pi i 0.\varphi_n}\ket{1}\right)\dots \left(\ket{0} + e^{2\pi i 0.\varphi_1\dots \varphi_n}\ket{1}\right)$$
+y utilizando [@eq:binary] vemos que la salida del algoritmo tras aplicar la transformada de Fourier cuántica inversa es exactamente $\ket{\varphi_1 \dots \varphi_n}$.
+No desarrollamos la demostración de la corrección del [@algo:phase] en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010]. 
 
 A partir del [@lemma:phase] probamos que el cálculo de la parte cuántica del algoritmo de Shor puede hacerse en tiempo polinomial cuántico:
 
