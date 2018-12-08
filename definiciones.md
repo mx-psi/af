@@ -22,6 +22,78 @@ $$x_k := \frac{1}{N} \sum_{n=0}^{N-1} X_n W_N^{-kn}$$
 para $0 \leq k < N$.
 :::
 
+## Forma matricial de la DFT
+
+Una manera de ver la DFT que resulta de utilidad es como la multiplicación de una matriz por un vector. En efecto, podemos ver que
+
+$$\mathcal{F}\{x\} = F \left( \begin{array}{c} x_0 \\ \vdots \\ x_{N-1} \end{array} \right) \text{,}$$
+
+donde
+
+$$F = \left( \begin{array}{cccc}
+W_N^{0 \cdot 0} & W_N^{0 \cdot 1} & \cdots & W_N^{0(N-1)}     \\
+W_N^{1 \cdot 0} & W_N^{1 \cdot 1} & \cdots & W_N^{1(N-1)}     \\
+\vdots          & \vdots          & \ddots & \vdots           \\
+W_N^{(N-1) 0}   & W_N^{(N-1) 1}   & \cdots & W_N^{(N-1)(N-1)} \\
+\end{array} \right) \text{.}$$
+
+De la misma manera, se tiene
+
+$$\mathcal{F}^{-1}\{x\} = \frac{1}{N} G \left( \begin{array}{c} x_0 \\ \vdots \\ x_{N-1} \end{array} \right) \text{,}$$
+
+donde
+
+$$G = \left( \begin{array}{cccc}
+W_N^{-0 \cdot 0} & W_N^{-0 \cdot 1} & \cdots & W_N^{-0(N-1)}     \\
+W_N^{-1 \cdot 0} & W_N^{-1 \cdot 1} & \cdots & W_N^{-1(N-1)}     \\
+\vdots          & \vdots          & \ddots & \vdots           \\
+W_N^{-(N-1) 0}   & W_N^{-(N-1) 1}   & \cdots & W_N^{-(N-1)(N-1)} \\
+\end{array} \right) \text{.}$$
+
+:::{.proposition}
+Definiendo $u_k := \left( W_N^{k0}, W_N^{k1}, \dots, W_N^{k(N-1)}\right)$, los vectores $\{u_0, u_1, \dots, u_{N-1}\}$ forman una base ortogonal de $\mathbb{C}^N$
+:::
+:::{.proof}
+Sabemos que $F = (u_0 | u_1 | \dots | u_{N-1}) = F^T$. $F$ es una matriz de Vandermonde, luego $\det(F) = \prod_{0 \leq i < j < N} (W_N^i - W_N^j) \neq 0$ y los vectores $\{u_0, u_1, \dots, u_{N-1}\}$ son linealmente independientes.
+
+Veamos la ortogonalidad. Para $i, j \in \{0, \dots, N-1\}$,
+
+$$\langle u_i, u_j \rangle = \sum_{n=0}^{N-1} W_N^{-in} W_N^{jn} = \sum_{n=0}^{N-1} W_N^{(j-i)n} \text{.}$$
+
+De esta fórmula se ve que, si $i=j$, $\langle u_i, u_j \rangle = N$, mientras que si $i \neq j$ se tiene $\langle u_i, u_j \rangle = 0$ ya que
+
+$$W_N^{(j-i)} \langle u_i, u_j \rangle = \sum_{n=0}^{N-1} W_N^{(j-i)(n+1)} = \sum_{n=1}^{N} W_N^{(j-i)n} = \sum_{n=0}^{N-1} W_N^{(j-i)n} = \langle u_i, u_j \rangle \text{.}$$
+
+Luego $\langle u_i, u_j \rangle = N \delta_{ij}$.
+:::
+:::{.corollary}
+$\mathcal{F}$ es un automorfismo.
+:::
+
+Ahora estamos en condiciones de probar que efectivamente $\mathcal{F} \circ \mathcal{F}^{-1} = \mathcal{F}^{-1} \circ \mathcal{F} = \operatorname{id}$.
+
+:::{.proposition}
+Se verifica $\mathcal{F} \circ \mathcal{F}^{-1} = \mathcal{F}^{-1} \circ \mathcal{F} = \operatorname{id}$.
+:::
+:::{.proof}
+Basta ver que
+$$\begin{split}
+GF & = \left( \begin{array}{cccc}
+\langle u_1, u_1 \rangle     & \langle u_1, u_2 \rangle     & \cdots & \langle u_1, u_{N-1} \rangle     \\
+\langle u_2, u_1 \rangle     & \langle u_2, u_2 \rangle     & \cdots & \langle u_2, u_{N-1} \rangle     \\
+\vdots                       & \vdots                       & \ddots & \vdots                           \\
+\langle u_{N-1}, u_1 \rangle & \langle u_{N-1}, u_2 \rangle & \cdots & \langle u_{N-1}, u_{N-1} \rangle \\
+\end{array}\right) \\
+& =\left( \begin{array}{cccc}
+N\delta_{11} & N\delta_{12} & \cdots & N\delta_{1(N-1)}             \\
+N\delta_{21} & N\delta_{22} & \cdots & N\delta_{2(N-1)}             \\
+\vdots       & \vdots       & \ddots & \vdots                       \\
+N\delta_{(N-1)1} & N\delta_{(N-1)2} & \cdots & N\delta_{(N-1)(N-1)} \\
+\end{array}\right) = NI
+\end{split}$$
+y $FG = \left(G^T F^T\right)^T = (GF)^T = NI$.
+:::
+
 ## DFT normalizada
 
 En ocasiones conviene usar versiones de la DFT y la IDFT normalizadas o unitarias, esto es, que definan una isometría. Para ello solo tenemos que multiplicar la DFT y la IDFT por una constante de normalización. De esa manera llegamos a las siguientes definiciones:

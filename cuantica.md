@@ -2,7 +2,7 @@
 
 En esta sección describimos el algoritmo cuántico de cálculo de la transformada de Fourier y algunas aplicaciones.
 
-La computación cuántica es el estudio de un nuevo tipo de ordenador que utiliza los principios de la mecánica cuántica para obtener algoritmos más eficientes que los actuales. 
+La computación cuántica es el estudio de un nuevo tipo de ordenador que utiliza los principios de la mecánica cuántica para obtener algoritmos más eficientes que los actuales.
 Aunque su implementación física a gran escala no es todavía una realidad, desde los años 80 [@deutsch1985quantum] existe un campo que investiga de forma teórica qué problemas pueden resolverse de forma eficiente en estos ordenadores.
 
 Entre los problemas para los que existen algoritmos eficientes está el cálculo de la transformada de Fourier cuántica, una versión unitaria de la transformada de Fourier discreta para la que conocemos un algoritmo cuántico mucho más eficiente que cualquier algoritmo de transformada de Fourier rápida conocido.
@@ -31,11 +31,11 @@ Utilizamos la notación habitual en mecánica cuántica, en la que los vectores 
 Un **qubit** es un sistema cuántico con espacio de estados de dimensión 2 con una base ortonormal $(\ket{0},\ket{1})$. El término se utiliza también para referirse a un estado concreto; utilizando la identificación con representantes de norma 1 tenemos que un qubit es por tanto un vector $$\ket{\psi} = \alpha \ket{0} + \beta \ket{1} \text{ tal que } \norm{\ket{\psi}} = |\alpha|^2 + |\beta|^2 = 1.$$
 $\alpha$ y $\beta$ son las amplitudes de $\ket{0}$ y $\ket{1}$ respectivamente.
 
-En computación cuántica nos restringimos a sistemas compuestos por qubits. Esta restricción no supone ningún cambio en términos de qué problemas pueden resolverse eficientemente en un ordenador cuántico[@NielsenQuantumComputationQuantum2010]. 
+En computación cuántica nos restringimos a sistemas compuestos por qubits. Esta restricción no supone ningún cambio en términos de qué problemas pueden resolverse eficientemente en un ordenador cuántico[@NielsenQuantumComputationQuantum2010].
 
-### Sistemas compuestos 
+### Sistemas compuestos
 
-El espacio de estados de un sistema compuesto viene dado por el producto tensorial. 
+El espacio de estados de un sistema compuesto viene dado por el producto tensorial.
 Recordamos en la siguiente proposición la construcción de un espacio de Hilbert a partir del producto tensorial de dos espacios de Hilbert, cuya demostración puede encontrarse en [@weidmann2012linear].
 
 :::{.proposition #prop:hilbert}
@@ -60,7 +60,7 @@ y podemos entonces identificar cada elemento de la base con un número de 0 a $2
 
 ### Operaciones cuánticas
 
-De manera análoga a los modelos de computación clásicos los ordenadores cuánticos consideran el tiempo de forma discreta. 
+De manera análoga a los modelos de computación clásicos los ordenadores cuánticos consideran el tiempo de forma discreta.
 En este contexto se permiten dos tipos de operaciones: transformaciones unitarias (isométricas) que son deterministas y nos mantienen en el ámbito cuántico y mediciones que son no deterministas, irreversibles, y permiten comunicar el mundo cuántico con el clásico.
 
 Dado un operador $A : H \to H'$ entre espacios de Hilbert notamos su aplicación a un elemento $\ket{\psi} \in H$ como $A\ket{\psi} := A(\ket{\psi})$. En dimensión finita, identificamos el operador con su matriz respecto de la base usual de tal forma que $A$ puede referirse al operador o a $\mathcal{M}(A, B_u, B_u)$.
@@ -105,7 +105,7 @@ En concreto necesitaremos dos tipos de operaciones:
 
 1. Dados dos operadores lineales $A_i : H_i \to H'_i$ ($i = 1,2$) existe una única aplicación lineal $A_1 \otimes A_2 : H_1 \otimes H_2 \to H'_1 \otimes H'_2$ tal que
 $$(A_1 \otimes A_2)(\ket{x} \otimes \ket{y}) = (A_1\ket{x}) \otimes (A_2\ket{y}),$$
-conocida como su *producto tensorial*. 
+conocida como su *producto tensorial*.
 Si $A_1$y $A_2$ son unitarias también lo será $A_1 \otimes A_2$.
 2. Si $A$ es una operación unitaria podemos definir la operación $A$*-controlada* como la operación unitaria dada por la expresión matricial por bloques
 $$C_A= \left(\begin{array}{c|c} I_2 & 0 \\ \hline 0 & A \end{array} \right), \qquad C_A\ket{0}\ket{x} = \ket{0}\ket{x}, \quad C_A\ket{1}\ket{x} = \ket{1}A\ket{x}$$
@@ -129,7 +129,7 @@ La noción de familia de circuitos cuánticos nos permite formalizar el cálculo
 Para el cálculo de funciones debemos asumir que dada $x \in \{0,1\}^\ast$ arbitraria podemos preparar el estado inicial asociado $\ket{x}$ en como mucho $n = |x|$ pasos.
 
 :::{.definition}
-Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que 
+Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que
 $$P\left[C_n\left(\ket{x}\ket{0}^{\otimes p(n)}\right) = f(x)\ket{0}^{\otimes p(n)}\right] \geq \frac23$$
 :::
 
@@ -158,7 +158,7 @@ $$\ket{\operatorname{UDT}(\phi)} = \sum_{j = 0}^{N-1} (\operatorname{UDT} c)_j\k
 Explícitamente, la transformada es la aplicación unitaria que lleva el estado $\ket{j}, j \in {0, \dots, 2^n-1}$ de la base usual en
 $$\ket{j} \mapsto \frac{1}{\sqrt{2^n}} \sum_{k = 0}^{2^n-1} e^{2 \pi i j k/2^n}\ket{k},$$
 o, mediante cálculos sencillos vemos que podemos reescribirla de la siguiente forma, donde $j = j_1 \dots j_n$ es la expresión de $j$ en binario
-$$\ket{j_1 \dots j_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.j_1}\ket{1}\right)\dots \left(\ket{0} + e^{2\pi i 0.j_1\dots j_n}\ket{1}\right)$${#eq:binary}
+$$\ket{j_1 \dots j_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.j_1}\ket{1}\right)\dots\relax \left( \ket{0} + e^{2\pi i 0.j_1\dots j_n}\ket{1} \right)$${#eq:binary}
 
 El principal resultado de esta sección es:
 
@@ -234,7 +234,7 @@ El orden de $x$ en el grupo $U(\mathbb{Z}_N)$ es calculable en tiempo polinomial
 Consideramos la aplicación unitaria $U$
 $$\ket{j}\ket{k} \mapsto\ket{j}\ket{x^jk \mod N}$$
 
-Sea $r$ el periodo de $x$ ($\mod N$), $0 \leq s\leq r-1$. Puede verificarse que 
+Sea $r$ el periodo de $x$ ($\mod N$), $0 \leq s\leq r-1$. Puede verificarse que
 $$\ket{u_s} = \frac{1}{\sqrt{r}} \sum_{k = 0}^{r-1} \exp\left(\frac{-2\pi i s k}{r}\right)\ket{x^k \mod N}$$
 es un vector propio de $U$ con valor propio $\exp(\frac{2 \pi i s}{r})$.
 
@@ -242,7 +242,7 @@ Por tanto, si podemos construir $U$ y $\ket{u_s}$ podremos aplicar el [@algo:pha
 
 El cálculo de $U^{2^j}$ es eficiente mediante exponenciación binaria. Para el cálculo de $\ket{u_s}$ notamos que $$\frac{1}{\sqrt{r}} \sum_{s = 0}^{r-1} \ket{u_s} = \ket{1},$$ luego podemos aplicar el algoritmo sobre esta superposición y obtendremos la fracción $\frac{s}{r}$ para algún $s$.
 
-Combinando estos hechos obtenemos un algoritmo que aproxima $\frac{s}{r}$. 
+Combinando estos hechos obtenemos un algoritmo que aproxima $\frac{s}{r}$.
 Una análisis sencillo nos muestra que utilizando $t = 2\log N + 1 + \lceil \log(2 + \frac{1}{2 \varepsilon})\rceil$ podemos aproximar esta fracción con la precisión suficiente como para recuperar $r$.
 :::
 
@@ -259,7 +259,7 @@ Entonces $\gcd(x-1,N)$ es un divisor no trivial de $N$ calculable en tiempo $O(\
 :::{.proof}
 Por hipótesis $N | (x+1)(x-1)$, pero $x-1 < x+1 < N$, luego $N \not|(x+1)$ y $N \not|(x-1)$.
 
-Supongamos que $x-1$ fuera coprimo con $N$ entonces, por la identidad de Bézout y usando que $x^2 -1 = Nk$, 
+Supongamos que $x-1$ fuera coprimo con $N$ entonces, por la identidad de Bézout y usando que $x^2 -1 = Nk$,
 $$aN + b(x-1) = 1 \implies aN(x+1) + b(x^2-1) = x+1 \implies N(a(x+1) + bK) = x+1 \implies N |x+1$$
 lo que es una contradicción.
 
@@ -268,7 +268,7 @@ Para calcularlo utilizamos el algoritmo de Euclides.
 :::
 
 :::{.theorem #thm:probabilidad}
-Sea $N$ un entero compuesto impar positivo con más de un factor. 
+Sea $N$ un entero compuesto impar positivo con más de un factor.
 Sea $x \in U(\mathbb{Z}_N)$ elegido aleatoriamente de forma uniforme, $r = \operatorname{ord}(x)$.
 Entonces
 $$P[r \text{ es par y } x^{r/2} \neq -1 \mod N] > \frac{1}{2}$$
@@ -319,7 +319,7 @@ Tiempo de ejecución
 #. Si $N$ es par, **devuelve** $2$
 #. \label{paso:ab} Si $N = a^b$ para $a \geq 1$, $b \geq 2$, **devuelve** $a$.
 #. Elige $x$ uniformemente de $\mathbb{Z}_N\backslash\{0\}$.
-#. \label{paso:cuant} Si $\gcd(x,N) > 1$: **devuelve** $\gcd(x,N)$. 
+#. \label{paso:cuant} Si $\gcd(x,N) > 1$: **devuelve** $\gcd(x,N)$.
    En otro caso, halla $r := \operatorname{ord}(r,N)$.
 #. Si $r$ es par y $x^{r/2} \neq -1 \mod N$ **devuelve** $\gcd(x^{r/2}-1,N)$. En otro caso **falla**.
 :::

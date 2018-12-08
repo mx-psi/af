@@ -4,21 +4,6 @@ En esta sección consideraremos las secuencias $\{x\} = x_1, \dots, x_n, \{y\} =
 
 Enunciamos a continuación algunas propiedades elementales sobre la DFT.
 
-:::{.proposition #prop:linealidad}
-Se verifica
-
-$$\mathcal{F}(a\{x\}+b\{y\})=a\{X\}+b\{Y\}$$
-
-para cualquier $a,b \in \mathbb{C}$.
-:::
-:::{.proof}
-La prueba es inmediata: llamando $Z_0, \dots, Z_{N-1} = \mathcal{F}(a\{x\}+b\{y\})$, se tiene
-
-$$Z_k = \sum_{n=0}^{N-1} (ax_n + by_n) W_N^{-kn} = a \sum_{n=0}^{N-1} x_n W_N^{-kn} + b \sum_{n=0}^{N-1} y_n W_N^{-kn} = aX_k + bY_k$$
-
-para cada $0 \leq k < N$.
-:::
-
 :::{.proposition #prop:conjugacion}
 Para $N$ par, si $\{x\}$ es una secuencia real, se tiene $X_{\frac{N}{2}+k} = X_{\frac{N}{2}-k}^{\ast}$ para cada $k$, considerando $x_k = x_{k+N}$.
 :::
@@ -33,13 +18,13 @@ para cualquier $k$, donde hemos usado $W_N^{\frac{N}{2}}=-1$ y $W_N^{\ast} = W_N
 
 :::{.theorem #thm:parseval name="Teorema de Parseval"}
 Se verifica
-$$\langle \{x\}^{\ast}, \{y\}\rangle = \frac{1}{N} \langle \{X\}^{\ast}, \{Y\}\rangle \text{.}$$
+$$\langle \{x\}, \{y\}\rangle = \frac{1}{N} \langle \{X\}, \{Y\}\rangle \text{.}$$
 :::
 
 :::{.proof}
 $$\begin{split}
-\langle \{x\}, \{y\}^{\ast}\rangle & = \sum_{k=0}^{N-1} x_k^{\ast} y_k = \sum_{k=0}^{N-1} x_k^{\ast} \left( \frac{1}{N} \sum_{n=0}^{N-1} Y_n W_N^{-nk} \right) = \frac{1}{N} \sum_{n=0}^{N-1} Y_n \left( \sum_{k=0}^{N-1} x_k^{\ast}  W_N^{-nk} \right) \\
-& = \frac{1}{N} \sum_{n=0}^{N-1} Y_n \left( \sum_{k=0}^{N-1} x_k W_N^{nk} \right)^{\ast} = \frac{1}{N} \sum_{n=0}^{N-1} X_n{^\ast} Y_n = \frac{1}{N} \langle \{X\}^{\ast}, \{Y\}\rangle
+\langle \{x\}, \{y\} \rangle & = \sum_{k=0}^{N-1} x_k^{\ast} y_k = \sum_{k=0}^{N-1} x_k^{\ast} \left( \frac{1}{N} \sum_{n=0}^{N-1} Y_n W_N^{-nk} \right) = \frac{1}{N} \sum_{n=0}^{N-1} Y_n \left( \sum_{k=0}^{N-1} x_k^{\ast}  W_N^{-nk} \right) \\
+& = \frac{1}{N} \sum_{n=0}^{N-1} Y_n \left( \sum_{k=0}^{N-1} x_k W_N^{nk} \right)^{\ast} = \frac{1}{N} \sum_{n=0}^{N-1} X_n{^\ast} Y_n = \frac{1}{N} \langle \{X\}, \{Y\}\rangle
 \end{split}$$
 :::
 
