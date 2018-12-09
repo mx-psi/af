@@ -11,14 +11,14 @@ Para $N$ par, si $\{x\}$ es una secuencia real, se tiene $X_{\frac{N}{2}+k} = X_
 Basta ver que
 $$\begin{split}
 X_{\frac{N}{2}+k} & = \sum_{n=0}^{N-1} x_n W_N^{\left(\frac{N}{2}+k\right)n} = \sum_{n=0}^{N-1} -x_n W_N^{kn} = \sum_{n=0}^{N-1} \left(-x_n W_N^{kn}\right)^{\ast} \\
-& = \sum_{n=0}^{N-1} \left(x_n W_N^{\left(\frac{N}{2}-k\right)n}\right)^{\ast} = X_{\frac{N}{2}-k}^{\ast} \text{,}
+& = \sum_{n=0}^{N-1} \left(x_n W_N^{\left(\frac{N}{2}-k\right)n}\right)^{\ast} = X_{\frac{N}{2}-k}^{\ast},
 \end{split}$$
 para cualquier $k$, donde hemos usado $W_N^{\frac{N}{2}}=-1$ y $W_N^{\ast} = W_N^{-1}$.
 :::
 
 :::{.theorem #thm:parseval name="Teorema de Parseval"}
 Se verifica
-$$\langle \{x\}, \{y\}\rangle = \frac{1}{N} \langle \{X\}, \{Y\}\rangle \text{.}$$
+$$\langle \{x\}, \{y\}\rangle = \frac{1}{N} \langle \{X\}, \{Y\}\rangle.$$
 :::
 
 :::{.proof}
@@ -30,7 +30,7 @@ $$\begin{split}
 
 :::{.corollary #cor:plancherel name="Teorema de Plancherel"}
 Se verifica
-$$\|\{x\}\|_2 = \frac{1}{N} \|\{X\}\|_2 \text{.}$$
+$$\|\{x\}\|_2 = \frac{1}{N} \|\{X\}\|_2.$$
 :::
 
 :::{.proof}
@@ -45,21 +45,15 @@ Para las siguientes propiedades veremos las secuencias $\{x\}$ y $\{X\}$ como $N
 
 :::{.proposition #prop:despcircular name="Teorema de desplazamiento"}
 Definiendo $\operatorname{shift}_h\{x\}:=x_h, x_{h+1}, \dots, x_{h+N-1}$, se verifica
-
 $$\mathcal{F}(\operatorname{shift}_h\{x\})=\{X\} \{W_N^{-hk}\}_{0 \leq k < N}$$
-
 y
-
-$$\mathcal{F}(\{x\} \{W_N^{-hk}\}) = \operatorname{shift}_{-h}\{X\} \text{.}$$
+$$\mathcal{F}(\{x\} \{W_N^{-hk}\}) = \operatorname{shift}_{-h}\{X\}.$$
 :::
 :::{.proof}
 Sea $\hat{X}_0, \dots, \hat{X}_{N-1} := \mathcal{F}(\operatorname{shift}_h\{x\})$. Se tiene
-
 $$\hat{X}_k = \sum_{n=0}^{N-1} x_{h+n} W_N^{kn} = \sum_{n=h}^{h+N-1} x_n W_N^{k(n-h)} =  \left(\sum_{n=h}^{h+N-1} x_n W_N^{kn}\right) W_N^{-hk} = X_k W_N^{-hk}$$
-
 para $0 \leq k < N$.
 
 Por otro lado,
-
-$$X_{k-h} = \sum_{n=0}^{N-1} x_n W_N^{k(n-h)} = \sum_{n=0}^{N-1} \left( x_n W_N^{-hk} \right) W_N^{kn} \text{.}$$
+$$X_{k-h} = \sum_{n=0}^{N-1} x_n W_N^{k(n-h)} = \sum_{n=0}^{N-1} \left( x_n W_N^{-hk} \right) W_N^{kn}.$$
 :::

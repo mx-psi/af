@@ -4,9 +4,7 @@ De manera análoga al caso continuo, en el caso discreto podemos definir una ope
 
 :::{.definition}
 Dadas dos secuencias $\{x\} = x_1, \dots, x_N$, $\{y\} = y_1, \dots, y_N$ de $N$ números complejos, definimos su convolución $\{x\} \ast \{y\} := \{z\}$ como $\{z\} = z_1, \dots, z_N$, donde
-
 $$z_k := \frac{1}{N} \sum_{n=0}^{N-1} x_n y_{k-n}$$
-
 y $x_{k \pm N} := x_k, y_{k \pm N} := y_k$ para $0 \leq k < N$.
 :::
 
@@ -22,8 +20,7 @@ El siguiente Teorema establece una relación fundamental entre la convolución d
 
 :::{.theorem #thm:conv}
 Dadas dos secuencias $\{x\} = x_1, \dots, x_N$, $\{y\} = y_1, \dots, y_N$ de $N$ números complejos se verifica
-
-$$\mathcal{F}(\{x\} \ast \{y\}) = \frac{1}{N} \mathcal{F}\{x\} \mathcal{F}\{y\} \text{.}$$
+$$\mathcal{F}(\{x\} \ast \{y\}) = \frac{1}{N} \mathcal{F}\{x\} \mathcal{F}\{y\}.$$
 :::
 
 :::{.proof}
@@ -32,7 +29,7 @@ Llamando $\{z\} = \{x\} \ast \{y\} = z_0, \dots, z_{N-1}$, $\{Z\} = \mathcal{F}\
 $$\begin{split}
 Z_k & = \sum_{n=0}^{N-1} z_n W_N^{kn} = \sum_{n=0}^{N-1} \left( \frac{1}{N} \sum_{m=0}^{N-1} x_m y_{n-m} \right) W_N^{kn} = \frac{1}{N} \sum_{m=0}^{N-1} \left( \sum_{n=0}^{N-1} x_m y_{n-m} W_N^{kn} \right) \\
 & = \frac{1}{N} \sum_{m=0}^{N-1} \left( x_m W_N^{km} \sum_{n=0}^{N-1} y_{n-m} W_N^{k(n-m)} \right) = \frac{1}{N} \sum_{m=0}^{N-1} \left( x_m W_N^{km} \sum_{n=0}^{N-1} y_n W_N^{kn} \right) \\
-& \frac{1}{N} \left( \sum_{m=0}^{N-1} x_m W_N^{km} \right) \left( \sum_{n=0}^{N-1} y_n W_N^{kn} \right) = X_k Y_k \text{,}\\
+& \frac{1}{N} \left( \sum_{m=0}^{N-1} x_m W_N^{km} \right) \left( \sum_{n=0}^{N-1} y_n W_N^{kn} \right) = X_k Y_k,\\
 \end{split}$$
 
 donde $x_{k \pm N} := x_k, y_{k \pm N} := y_k$, lo que concluye la prueba.
