@@ -1,4 +1,4 @@
-# APLICACIONES DE LA FFT
+# Aplicaciones de la FFT
 
 En la siguiente sección enunciamos brevemente algunas aplicaciones de la FFT basándonos en [@fft-algo] y [@apps].
 
