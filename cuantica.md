@@ -135,7 +135,7 @@ La noción de familia de circuitos cuánticos nos permite formalizar el cálculo
 Para el cálculo de funciones debemos asumir que dada $x \in \{0,1\}^\ast$ arbitraria podemos preparar el estado inicial asociado $\ket{x}$ en como mucho $n = |x|$ pasos. Incluimos también *qubits ancilla* para cálculos auxiliares.
 
 :::{.definition}
-Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que 
+Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que
 $$P\left[C_n\left(\ket{x}\ket{0}^{\otimes p(n)}\right) = f(x)\ket{\psi}\right] \geq \frac23$$
 :::
 
@@ -166,7 +166,7 @@ $$\ket{x} \mapsto \frac{1}{\sqrt{2^n}} \sum_{k = 0}^{2^n-1} e^{2 \pi i x k/2^n}\
 o, mediante cálculos sencillos vemos que podemos reescribirla de la siguiente forma, donde $x = x_1 \dots x_n$ es la expresión de $x$ en binario
 \begin{equation}
 \label{eq:binary}
-\ket{x_1 \dots x_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.x_n}\ket{1}\right)\dots \left(\ket{0} + e^{2\pi i 0.x_1\dots x_n}\ket{1}\right)
+\ket{x_1 \dots x_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0.x_n}\ket{1}\right)\dots\relax \left(\ket{0} + e^{2\pi i 0.x_1\dots x_n}\ket{1}\right)
 \end{equation}
 
 El principal resultado de esta sección es:
@@ -237,11 +237,11 @@ $$\ket{\overset{\sim}{\varphi_u}} \ket{u}$$
 5. Medimos el primer registro.
 :::
 
-Supongamos que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tiene exactamente $n$ bits. 
+Supongamos que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tiene exactamente $n$ bits.
 En tal caso el estado después del [@paso:ucontrolada] es
-$$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2\pi i 0.\varphi_n}\ket{1}\right)\dots \left(\ket{0} + e^{2\pi i 0.\varphi_1\dots \varphi_n}\ket{1}\right)$$
+$$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2\pi i 0.\varphi_n}\ket{1}\right)\dots\relax \left(\ket{0} + e^{2\pi i 0.\varphi_1\dots \varphi_n}\ket{1}\right)$$
 y utilizando [@eq:binary] vemos que la salida del algoritmo tras aplicar la transformada de Fourier cuántica inversa es exactamente $\ket{\varphi_1 \dots \varphi_n}$.
-No desarrollamos la demostración de la corrección del [@algo:phase] en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010]. 
+No desarrollamos la demostración de la corrección del [@algo:phase] en el caso general, cuyos detalles pueden consultarse en [@NielsenQuantumComputationQuantum2010].
 
 A partir del [@lemma:phase] probamos que el cálculo de la parte cuántica del algoritmo de Shor puede hacerse en tiempo polinomial cuántico:
 

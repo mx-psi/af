@@ -127,3 +127,19 @@ y
 $$k/N = \left(\frac{k_1}{N_1}, \dots, \frac{k_d}{N_d}\right)$$
 para $0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d$.
 :::
+
+## Convolución discreta
+
+De manera análoga al caso continuo, en el caso discreto podemos definir una operación de convolución y un Teorema de Convolución que la relacione con la transformada de Fourier.
+
+:::{.definition}
+Dadas dos secuencias $\{x\} = x_1, \dots, x_N$, $\{y\} = y_1, \dots, y_N$ de $N$ números complejos, definimos su convolución $\{x\} \ast \{y\} := \{z\}$ como $\{z\} = z_1, \dots, z_N$, donde
+$$z_k := \frac{1}{N} \sum_{n=0}^{N-1} x_n y_{k-n}$$
+y $x_{k \pm N} := x_k, y_{k \pm N} := y_k$ para $0 \leq k < N$.
+:::
+
+También necesitaremos definir el producto de dos secuencias, que no es más que su producto elemento a elemento.
+
+:::{.definition}
+Dadas dos secuencias $\{x\} = x_1, \dots, x_N$, $\{y\} = y_1, \dots, y_N$ de $N$ números complejos, definimos su producto como $\{x\} \{y\} := x_0 y_0, \dots, x_{N-1} y_{N-1}$ para $0 \leq m < N$.
+:::
