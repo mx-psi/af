@@ -1,12 +1,12 @@
-## Complejidad asintótica
+# Complejidad asintótica
 
-### Introducción. Representación de polinomios: Representación mediante coeficientes y representación punto-valor
+## Introducción. Representación de polinomios: Representación mediante coeficientes y representación punto-valor
 
 En esta pequeña introducción se presentan dos formas de representar polinomios: por medio de sus coeficientes y por parejas punto-valor (un punto y su evaluación en el polinomio). Atacaremos el problema de multiplicar polinomios de grado acotado por $n$, consiguiendo, a través de FFT, un algoritmo de orden $O(n \log n)$. El contenido está basado en el capítulo 30 de [@introAlgorithms].
 
 **Nota:** $T(n)$ es $O(f(n)) \Leftrightarrow \exists c \in \mathbb{R}, \exists n_0 \in \mathbb{N}$, tal que $\forall n \geq n_0, T(n) \leq c f(n)$
 
-#### Representación mediante coeficientes
+### Representación mediante coeficientes
 
 La representación mediante coeficientes de un polinomio $A(x) = \sum_{j=0}^{n-1} a_j x^j$ de grado acotado por $n$ es un vector de coeficientes $a=(a_0,a_1,...,a_{n-1})$. Esta representación es interesante para ciertas operaciones tales como la **evaluación** (mediante la regla de Horner, tomando un tiempo $O(n)$) o la suma de polinomios, ya que si
 
@@ -16,7 +16,7 @@ calculándose en un tiempo de $O(n)$.
 
 Sin embargo, si se considera la multiplicación entre dos polinomios $A(x)$ y $B(x)$ de grado menor o igual que n a través de la representación mediante coeficientes, aplicando la propiedad distributiva del producto respecto de la suma (convolución de los coeficientes), el tiempo necesario asciende a $O(n^2)$, siendo muy costoso. Como la multiplicación de polinomios y el cálculo de convoluciones es una cuestión fundamental en este trabajo, es necesario encontrar alternativas más eficientes.
 
-#### Representación punto-valor
+### Representación punto-valor
 
 La representación punto valor de un polinomio $A(x), \deg(A) \leq n$ es un conjunto de n pares punto-valor
 
@@ -65,7 +65,7 @@ $$a = V(x_0,x_1,...,x_{n-1})^{-1}y$$
 
 Esta representación es conveniente tanto en sumas como en multiplicación de polinomios, obteniéndose en un tiempo $O(n)$. Sin embargo, hay que tener en cuenta que si $A,B$ son polinomios de grado menor o igual que n y $C=A+B$, entonces $\deg(C)= \deg(A) + \deg(B)$, luego C es un polinomio de grado menor o igual que 2n. Para interpolar el polinomio de acuerdo al teorema anterior se necesitan $2n$ parejas punto-valor, por lo que hay que utilizar representaciones extendidas de cada conjunto de parejas de forma que cada uno contenga $2n$ parejas. Dados dos polinomios con su representación punto-valor extendida, se comprueba que el tiempo necesario para multiplicarlos es del orden de $O(n)$, mucho más rápido que el tiempo necesario para multiplicarlos a través de sus coeficientes.
 
-#### Multiplicación rápida de polinomios en forma de coeficientes
+## Multiplicación rápida de polinomios en forma de coeficientes
 
 ¿Es posible utilizar el método de multiplicación de polinomios en su forma punto-valor (tiempo lineal) para acelerar la multiplicación a través de los coeficientes? La respuesta a esta pregunta pasa por analizar nuestra habilidad de evaluar e interpolar polinomios rápidamente.
 
@@ -91,11 +91,11 @@ Los pasos (1) y (3) son lineales y los pasos (2) y (4) son de orden $O(n\log n)$
 El producto de dos polinomios de grado menor o igual que n representados por sus coeficientes puede ser computado en un tiempo $O(n\log n)$ y la salida vendrá representada por sus coeficientes.
 :::
 
-#### Complejidad de la FFT
+## Complejidad de la FFT
 
 Para darle significado al teorema anterior, nos centramos en estudiar cómo usar la FFT en la evaluación e interpolación de polinomios. Introducimos conceptos ya conocidos pero que serán necesarios.
 
-##### Raíces complejas de la unidad
+### Raíces complejas de la unidad
 
 Una raíz n-ésima de la únidad es un número $\omega$ tal que
 $$\omega^n = 1$$
@@ -122,7 +122,7 @@ Como $\omega_{n}^{n/2} = -1$, entonces $\omega_{n}^{k+n/2} = - \omega_{n}^{k}$ y
 $(\omega_{n}^{k+n/2})^{2} = \omega_{n}^{2k}$
 :::
 
-##### La FFT
+### La FFT
 
 Nos encontrábamos en la situación de evaluar $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $\omega_{n}^{0}, \omega_{n}^{1},...,\omega_{n}^{n-1}$. Sin pérdida de generalidad, asumimos que $n$ es potencia de 2 como ya hemos alarado antes. Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,...,n-1$
 $$y_k = A(\omega_{n}^{k}) = \sum_{j=0}^{n-1} a_j \omega_{n}^{kj}$$.
@@ -145,28 +145,3 @@ así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad
 2. combinar los resultados en la expresión $\ref{eqn:def}$.
 
 Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
-
-![Pseudocódigo del algoritmo](./imgs/rfft.png)
-
-El algoritmo funciona como sigue: Líneas  2-3 representan el caso base de la recursión. La DFT de un elemento es el propio elemento:
-$$y_0 = a_0 \omega_1^0 = a_0$$
-
-Las líneas 6-7 definen los vectores de coeficientes de los polinomios $A^{[0]}$ y $A^{[1]}$. Las líneas 4,5 y 13 garantizan que $\omega$ está actualizado de forma que cuando las líneas 11 y 12 se ejecutan, $\omega = \omega_n^k$. Las líneas 8-9 llevan a cabo el $DFT_{n/2}$ recursivo tal que, para $k=0,1,..,n/2-1$,
-$$y_k^{[0]} = A^{[0]}\omega_{n/2}^k$$
-$$y_k^{[1]} = A^{[1]}\omega_{n/2}^k$$
-o, dado que $\omega_{n/2}^k = \omega_{n}^{2k}$ por el lema de cancelación,
-$$y_k^{[0]} = A^{[0]}\omega_{n}^{2k}$$
-$$y_k^{[1]} = A^{[1]}\omega_{n}^{2k}$$
-
-Para $y_0,y_1,...,y_{n/2-1}$, la línea 11 lleva
-$$y_k = y_k^{[0]} + \omega_n^k y_k^{[1]} = A^{[0]}(\omega_n^{2k}) + \omega_n^k A^{[1]}(\omega_n^{2k}) = A(\omega_n^k)$$
-
-Para $y_{n/2},y_{n/2 +1},...,y_{n-1}$, haciendo $k=0,1,...,n/2-1$, la línea 12 genera
-$$y_{k+n/2} = y_k^{[0]}-\omega_n^k y_k^{[1]} = y_k^{[0]} + \omega_n^{k+n/2}y_k^{[1]}=$$
-$$=A^{[0]}(\omega_n^{2k})+\omega_n^{k+n/2}A^{[1]}(\omega_n^{2k}) =
-A^{[0]}(\omega_n^{2k+n})+\omega_n^{k+n/2}A^{[1]}(\omega_n^{2k+n}) = $$
-$$ = A(\omega_n^{k+n/2})$$
-
-Por tanto, el vector $y$ devuelta por *RECURSIVE-FFT* es verdaderamente la DFT del vector $a$.  
-Para determinar el tiempo de ejecución de *RECURSIVE-FFT*, notamos que cada invocación al procedimiento recursivo toma un tiempo de $O(n)$, donde $n$ es la longitud del vector. Por tanto,
-$$T(n) = 2T(n/2)+O(n) = O(n lgn)$$

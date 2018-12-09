@@ -36,5 +36,11 @@ Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen:
 
 ![Representación de las ecuaciones](./imgs/butterfly.png)
 
+Sea $N=16$. La computación de una DFT con 16 puntos requiere $N^2=256$ sumas y multiplicaciones. A través de $G^F(k), H^F(k)$ requiere sólo 128+16=144 sumas y multiplicaciones, de forma que se ahorran 112 operaciones. Ahorros adicionales son posibles descomponiendo las DFTs de 8 puntos en dos DFTs con 4 puntos y finalmente en cuatro DFTs de 2 puntos.
 
+Ilustremos el algoritmo para $N=8$
+$$ X^F(k) = \sum_{n=0}^{7} x(n) W_8^{kn}, \hspace{0.5cm} k=0,1,..,7$$
+$$ \text{Inverse } x(n) = 1/8 \sum_{k=0}^7 X^F(k) W_8^{-kn}, \hspace{0.5cm} n=0,1,...,7$$
 
+![EJemplo  N=8](./imgs/ejemplofft1.png)
+![Ejemplo  (continuación) N=8](./imgs/ejemplofft2.png)
