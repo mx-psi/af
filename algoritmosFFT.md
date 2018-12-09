@@ -32,13 +32,13 @@ $$W_N^{N/2} = \exp(-j\pi)=-1$$
 Como $W_N^{k+N/2} = - W_N^k$, tenemos que
 $$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,...,N/2 -1 \hspace{1cm} (b)$$
 
-Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen:
+Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen([@fft-algo]):
 
 ![Representación de las ecuaciones](./imgs/butterfly.png)
 
 Sea $N=16$. La computación de una DFT con 16 puntos requiere $N^2=256$ sumas y multiplicaciones. A través de $G^F(k), H^F(k)$ requiere sólo 128+16=144 sumas y multiplicaciones, de forma que se ahorran 112 operaciones. Ahorros adicionales son posibles descomponiendo las DFTs de 8 puntos en dos DFTs con 4 puntos y finalmente en cuatro DFTs de 2 puntos.
 
-Ilustremos el algoritmo para $N=8$
+Ilustremos el algoritmo para $N=8$ ([@fft-algo])
 $$ X^F(k) = \sum_{n=0}^{7} x(n) W_8^{kn}, \hspace{0.5cm} k=0,1,..,7$$
 $$ \text{Inverse } x(n) = 1/8 \sum_{k=0}^7 X^F(k) W_8^{-kn}, \hspace{0.5cm} n=0,1,...,7$$
 
