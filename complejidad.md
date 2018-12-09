@@ -153,8 +153,8 @@ Presentamos ahora el pseudocódigo del algoritmo tratado ([@introAlgorithms]).
 En las líneas 2-3 representa el caso base de la recursión, ya que la DFT de un elemento es él mismo.  
 
 Las líneas 6-7 definen los vectores de coeficientes para los polinomios $A^[0], A^[1]$. Las líneas 4,5 y 13 garantizan que $\omega$ se actualiza propiamente. Las líneas 8-9 lleva a cabo el cómputo de $DFN_{n/2}$. Fijando $k=0,1,...,n/2-1$
-$$y_k^{[0]}=A^{[0]}\omega_n/2^k$$
-$$y_k^{[1]}=A^{[1]}\omega_n/2^k$$
+$$y_k^{[0]}=A^{[0]}\omega_{n/2}^k$$
+$$y_k^{[1]}=A^{[1]}\omega_{n/2}^k$$
 
 Dado que $\omega_{n/2}^k = \omega_n^{2k}$ por el lema de cancelación,
 $$y_k^{[0]}=A^{[0]}\omega_n^{2k}$$
