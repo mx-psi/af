@@ -102,12 +102,12 @@ Dejaremos para más adelante ([@cor:isometries]) comprobar que, en efecto, $\ope
 
 ## DFT multidimensional
 
-Podemos definir una transformada de Fourier discreta generalizada para el caso de vectores multidimensionales $\{x\} = \{x_{k_1, \dots, k_d} \colon 0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d \} \in \mathbb{C}^{N_1 \times \dots \times N_d}$ en lugar de secuencias $\{x\} \in \mathbb{C}^N$ que llamaremos DFT multidimensional. La DFT multidimensional será de utilidad para algunas de las aplicaciones que veremos en este trabajo.
+Podemos definir una transformada de Fourier discreta generalizada para el caso de vectores multidimensionales $\{x\} = \{x_{k_1, \dots, k_d} \colon 0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d \} \in \mathbb{C}^{N_1 \dots N_d}$ en lugar de secuencias $\{x\} \in \mathbb{C}^N$ que llamaremos DFT multidimensional. La DFT multidimensional será de utilidad para algunas de las aplicaciones que veremos en este trabajo.
 
 :::{.definition}
 Dado un vector multidimensional
-$$\{x\} = \{x_{k_1, \dots, k_d} \colon 0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d \} \in \mathbb{C}^{N_1 \times \dots \times N_d},$$
-definimos su *transformada discreta de Fourier* $\mathcal{F} \colon \mathbb{C}^{N_1 \times \dots \times N_d} \to \mathbb{C}^{N_1 \times \dots \times N_d}$ como $\mathcal{F}\{x\} = X_1, \dots, X_d$, donde
+$$\{x\} = \{x_{k_1, \dots, k_d} \colon 0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d \} \in \mathbb{C}^{N_1 \dots N_d},$$
+definimos su *transformada discreta de Fourier* $\mathcal{F} \colon \mathbb{C}^{N_1 \dots N_d} \to \mathbb{C}^{N_1 \dots N_d}$ como $\mathcal{F}\{x\} = X_1, \dots, X_d$, donde
 $$X_k := \sum_{n \in N} \left( x_n e^{- 2 \pi i \langle n, k/N \rangle} \right) ,$$
 $$N = \{0, 1, \dots, N_1-1\} \times \{0, 1, \dots, N_2-1\} \times \dots \times \{0, 1, \dots, N_d-1\} ,$$
 $$k = (k_1, \dots, k_d) ,$$
@@ -120,8 +120,8 @@ Así mismo, podemos también generalizar en el mismo sentido la IDFT.
 
 :::{.definition}
 Dado un vector multidimensional
-$$\{X\} = \{X_{k_1, \dots, k_d} \colon 0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d \} \in \mathbb{C}^{N_1 \times \dots \times N_d} ,$$
-definimos su *transformada discreta de Fourier inversa* $\mathcal{F}^{-1} \colon \mathbb{C}^{N_1 \times \dots \times N_d} \to \mathbb{C}^{N_1 \times \dots \times N_d}$ como $\mathcal{F}^{-1}\{X\} = x_1, \dots, x_n$, donde
+$$\{X\} = \{X_{k_1, \dots, k_d} \colon 0 \leq k_1 < N_1, \dots, 0 \leq k_d < N_d \} \in \mathbb{C}^{N_1 \dots N_d} ,$$
+definimos su *transformada discreta de Fourier inversa* $\mathcal{F}^{-1} \colon \mathbb{C}^{N_1 \dots N_d} \to \mathbb{C}^{N_1 \dots N_d}$ como $\mathcal{F}^{-1}\{X\} = x_1, \dots, x_n$, donde
 $$x_k := \frac{1}{\prod_{r=1}^d N_r} \sum_{n \in N} \left( X_n e^{2 \pi i \langle n, k/N \rangle} \right) ,$$
 $$N = \{0, 1, \dots, N_1-1\} \times \{0, 1, \dots, N_2-1\} \times \dots \times \{0, 1, \dots, N_d-1\} ,$$
 $$k = (k_1, \dots, k_d) ,$$
