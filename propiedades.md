@@ -46,9 +46,8 @@ $$\langle \{x\}, \{y\}\rangle = \frac{1}{N} \langle \{X\}, \{Y\}\rangle.$$
 
 :::{.proof}
 $$\begin{split}
-\langle \{x\}, \{y\} \rangle & = \sum_{k=0}^{N-1} x_k^{\ast} y_k = \sum_{k=0}^{N-1} x_k^{\ast} \left( \frac{1}{N} \sum_{n=0}^{N-1} Y_n W_N^{-nk} \right) = \frac{1}{N} \sum_{n=0}^{N-1} Y_n \left( \sum_{k=0}^{N-1} x_k^{\ast}  W_N^{-nk} \right) \\
-& = \frac{1}{N} \sum_{n=0}^{N-1} Y_n \left( \sum_{k=0}^{N-1} x_k W_N^{nk} \right)^{\ast} = \frac{1}{N} \sum_{n=0}^{N-1} X_n{^\ast} Y_n = \frac{1}{N} \langle \{X\}, \{Y\}\rangle
-\end{split}$$
+\langle \{x\}, \{y\} \rangle & = \left(\{x\}^{\ast}\right)^T \{y\} = \left( \left( \frac{1}{N}G\{X\} \right)^{\ast} \right)^T \left( \frac{1}{N} G\{Y\}\right) = \frac{1}{N^2} \left( \{X\}^{\ast} \right)^T \left(G^{\ast}\right)^T G\{Y\} \\
+& = \frac{1}{N^2} \left( \{X\}^{\ast} \right)^T FG\{Y\} = \frac{1}{N} \left( \{X\}^{\ast} \right)^T \{Y\} = \frac{1}{N} \langle \{X\}, \{Y\}\rangle\end{split}$$
 :::
 
 :::{.corollary #cor:plancherel name="Teorema de Plancherel"}

@@ -2,6 +2,8 @@
 
 A continuación definiremos la transformada discreta de Fourier o DFT (por *discrete Fourier Transform*) y la trasformada discreta de Fourier inversa o IDFT (por *inverse discrete Fourier Transform*).
 
+En este trabajo hablaremos a menudo de *secuencias* para referirnos a vectores y usaremos la notación $\{x\} = x_1, \dots, x_{N-1}$ para referirnos al vector $(x_1, \dots, x_{N-1})$.
+
 :::{.definition}
 Dada una secuencia $\{x\}=x_0, \dots, x_{N-1}$ de $N$ números complejos, definimos su *transformada discreta de Fourier* $\mathcal{F} \colon \mathbb{C}^N \to \mathbb{C}^N$ como $\mathcal{F}\{x\}= X_0, \dots, X_{N-1}$, donde
 $$X_k := \sum_{n=0}^{N-1} x_n e^{\frac{-2 \pi ikn}{N}}$$
