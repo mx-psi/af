@@ -1,7 +1,7 @@
 PANDOC:=pandoc
 FILTERS:= filters/env.hs filters/pandoc-crossref pandoc-citeproc
 PFLAGS:= $(foreach filter,$(FILTERS),-F $(filter))
-SRCS:= intro.md definiciones.md convolucion.md propiedades.md complejidad.md algoritmosFFT.md aplicaciones.md compresion.md cuantica.md final.md
+SRCS:= 1.intro.md 2.definiciones.md 3.convolucion.md 4.propiedades.md 5.complejidad.md 6.algoritmosFFT.md 7.aplicaciones.md 8.compresion.md 9.cuantica.md 10.final.md
 
 
 .PHONY: all clean check
