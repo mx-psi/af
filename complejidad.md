@@ -145,3 +145,25 @@ así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad
 2. combinar los resultados en la expresión $\ref{eqn:def}$.
 
 Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+
+![Pseudocódigo del algoritmo](./imgs/rfft.png)
+
+En las líneas 2-3 representa el caso base de la recursión, ya que la DFT de un elemento es él mismo.  
+
+Las líneas 6-7 definen los vectores de coeficientes para los polinomios $A^[0], A^[1]$. Las líneas 4,5 y 13 garantizan que $\omega$ se actualiza propiamente. Las líneas 8-9 lleva a cabo el cómputo de $DFN_{n/2}$. Fijando $k=0,1,...,n/2-1$
+$$y_k^[0]=A^[0]\omega_n/2^k$$
+$$y_k^[1]=A^[1]\omega_n/2^k$$
+
+Dado que $\omega_{n/2}^k = \omega_n^{2k}$ por el lema de cancelación,
+$$y_k^[0]=A^[0\omega_n^{2k}$$
+$$y_k^[1]=A^[1]\omega_n^{2k}$$
+
+Líneas 11-12 combinan los resultados de los cálculos de la $DFT_{n/2}$ recursiva. Para $y_0,y_1,...,y_{n/2-1}$, la línea 11 asegura
+$$y_k = A(\omega_n^k)
+,
+Para $y_{n/2},y_{n/2+1},...,y_{n-1}$, fijando $k=0,1,...,n/2-1$, la línea 12 asegura (debido a las propiedades de las raíces n-ésimas de la unidad enunciadas)
+$$y_{k+n/2} = A \omega_n^{k+n/2}$$
+Por tanto, el vector $y$, salida del algoritmo es la DFT del vector $a$.  
+
+Para determinar el tiempo de ejecución del procedimiento mostrado, notamos que excluyendo las llamadas recursivas, cada invocación toma un tiempo $O(n)$, donde $n$ es la longitud del vector entrada. Por tanto, la recurrencia es del orden
+$$T(n) = 2T(n/2)+O(n) = O(n lg n)$$
