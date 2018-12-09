@@ -21,12 +21,12 @@ para $\alpha, \beta$ arbitrarios (en este caso, $\alpha = \frac{cos \theta}{N}, 
 $$G^F(k_1,k_2) = \frac{1}{N^2} X^F(k_1,k_2)exp[\frac{j2\pi}{N}(k_1 m_1 + k_2 m_2)]$$
 
 Con todo esto, podemos escribir 
-$$g(n_1,n_2;\alpha, \beta) = Z^{*}(n_2,n_1) sum_{k_1=0}^{N-1} \sum_{k_2=0}^{N-1} \{G^F(k_1,k_2) Z(k_1,k_2)\} Z^{*}(k_1-n_1,k_2+n_2) $$
+$$g(n_1,n_2;\alpha, \beta) = Z^{*}(n_2,n_1) \sum_{k_1=0}^{N-1} \sum_{k_2=0}^{N-1} \{G^F(k_1,k_2) Z(k_1,k_2)\} Z^{*}(k_1-n_1,k_2+n_2) $$
 
-donde $ Z(n_1,n_2) = exp(j\pi[(n_1^2-n_2^2) \alpha +2n_1 n_2 \beta]), G^F(k_1,k_2)$ se define como antes y * denota el conjugado complejo. Todo esto implica dos multiplicaciones y una convolución, que se pueden llevar a cabo usando FFTs 2-D (figura de debajo [@fft-algo]) 
+donde $Z(n_1,n_2) = exp(j \pi((n_1^2-n_2^2) \alpha +2n_1 n_2 \beta)), G^F(k_1,k_2)$  se define como antes y * denota el conjugado complejo. Todo esto implica dos multiplicaciones y una convolución, que se pueden llevar a cabo usando FFTs 2-D (figura de debajo [@fft-algo]) 
 ![Rotación de una imagen con FFT 2-D](./imgs/rotacion.png)
 
-El resultado sobre una imagen sería el siguiente:
+
 ![Ejemplo de rotación](./imgs/ejemplo-rotacion.png)
 
 ## OFDM
@@ -63,7 +63,7 @@ $$Y^F(k) = Re[X^F(k)] = \sum_{n=0}^{N-1} [a_n cos(2\pi f_n t_k) + b_n sin(2\pi f
 Finalmente,
 $$y(t) = \sum_{n=0}^{N-1} [a_n cos(2\pi f_n t_k) + b_n sin(2\pi f_n t_k)] \hspace{0.5cm} 0 \leq t \leq N \Delta t$$
 
-### Reconocimiento facial tridimensional
+## Reconocimiento facial tridimensional
 
 Varias técnicas basadas en proyección de características usando DFT ([@LA7]) se aplican para registrar escáneres 3D de caras para reconocimiento facial. Estas técnicas de extraccińo de características se aplican en tres representaciones diferentes, llamadas 3D point clouds, imágenes profundas 2D y 3D voxel.  
 Usando una base de datos facial 3D-RMA, Dutagaci, Sankur y Yemez ([@LA7]) han llevado a cabo un reconocimiento de varios esquemas. La base de datos contiene el escáner facial de 106 sujetos. Los datos obtenidos son los siguientes ([@LA7]).
