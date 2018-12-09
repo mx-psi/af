@@ -10,7 +10,7 @@ Es la forma más simple y común del algoeritmo de Cooley-Tukey. Radio-2 DIT des
 
 ![Pequeña visualización del particionado](./imgs/radix-2DIT.png)
 
-Para $k = 0,1,...,N-1$,
+Para $k = 0,1,\dots,N-1$,
 
 $$X^F(k) = \sum_{n=0}^{N-1} x(n) W_{N}^{nk} = \sum_{n \text{ par}} x(n) W_{N}^{nk} + \sum_{n \text{ impar}} x(n) W_{N}^{nk}  = \sum_{r=0}^{N/2-1} x(2r) W_{N}^{2rk} +  \sum_{r=0}^{N/2-1} x(2r+1) W_{N}^{(2r+1)k} = $$ $$ =\sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk}$$
 
@@ -18,7 +18,7 @@ Nótese que
 
 $$ W_N^2 =\exp\left[\frac{-j2(2\pi)}{N}\right] = \exp\left(\frac{-j2\pi}{N/2}\right) = W_N/2$$
 
-$$X^F(k) = \sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk} = G^F(k) + W_N^k H^F(k), \hspace{1cm} k=0,1,...,N/2 - 1$$
+$$X^F(k) = \sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk} = G^F(k) + W_N^k H^F(k), \hspace{1cm} k=0,1,\dots,N/2 - 1$$
 
 Aquí $X^F(K)$ los N puntos de la DFT de $x(n)$ es expresada en términos de DFTs de N/2 puntos, $G^F(k)$ y $H^F(k)$, que son las DFTs de las instancias pares e impares de $x(n)$ respectivamente.
 
@@ -30,7 +30,7 @@ $$X^F(k+N/2) = G^F(k) + W_N^{k+N/2}H^F(k)$$
 $$W_N^{N/2} = \exp(-j\pi)=-1$$
 
 Como $W_N^{k+N/2} = - W_N^k$, tenemos que
-$$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,...,N/2 -1 \hspace{1cm} (b)$$
+$$X^F(k+N/2) = G^F(k) - W_N^kH^F(k), \hspace{1cm} k=0,1,\dots,N/2 -1 \hspace{1cm} (b)$$
 
 Las ecuaciones (a) y (b) se expresan como una mariposa en la siguiente imagen([@fft-algo]):
 
@@ -40,7 +40,8 @@ Sea $N=16$. La computación de una DFT con 16 puntos requiere $N^2=256$ sumas y 
 
 Ilustremos el algoritmo para $N=8$ ([@fft-algo])
 $$ X^F(k) = \sum_{n=0}^{7} x(n) W_8^{kn}, \hspace{0.5cm} k=0,1,..,7$$
-$$ \text{Inverse } x(n) = 1/8 \sum_{k=0}^7 X^F(k) W_8^{-kn}, \hspace{0.5cm} n=0,1,...,7$$
+$$ \text{Inverse } x(n) = 1/8 \sum_{k=0}^7 X^F(k) W_8^{-kn}, \hspace{0.5cm} n=0,1,\dots,7$$
 
-![EJemplo  N=8](./imgs/ejemplofft1.png)
+![Ejemplo  N=8](./imgs/ejemplofft1.png)
+
 ![Ejemplo  (continuación) N=8](./imgs/ejemplofft2.png)
