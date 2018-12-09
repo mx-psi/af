@@ -16,7 +16,7 @@ $$X^F(k) = \sum_{n=0}^{N-1} x(n) W_{N}^{nk} = \sum_{n \text{ par}} x(n) W_{N}^{n
 
 Nótese que
 
-$$ W_N^2 =\exp\left[\frac{-j2(2\pi)}{N}\right] = \exp\left(\frac{-j2\pi}{N/2}\right) = W_N/2$$
+$$ W_N^2 =\exp\left[\frac{-j2(2\pi)}{N}\right] = \exp\left(\frac{-j2\pi}{N/2}\right) = W_{N/2}$$
 
 $$X^F(k) = \sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1} x(2r+1) (W_{N}^{2})^{rk} = G^F(k) + W_N^k H^F(k), \hspace{1cm} k=0,1,\dots,N/2 - 1$$
 

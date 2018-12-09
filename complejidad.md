@@ -97,18 +97,18 @@ Para darle significado al teorema anterior, nos centramos en estudiar cómo usar
 
 ### Raíces complejas de la unidad
 
-Una raíz n-ésima de la únidad es un número $\omega$ tal que
-$$\omega^n = 1$$
+Una raíz n-ésima de la únidad es un número $W$ tal que
+$$W^n = 1$$
 Hay exactamente $n$ raíces complejas n-ésimas de la unidad: $e^{\frac{2\pi i k}{n}}. k = 0,1,\dots,n-1$
 
 :::{.lemma name='Lema de cancelación'}
-Para cualesquiera $n \geq 0$, $k \geq 0$, y $d >0$, siendo $\omega_{n} = e^{\frac{2\pi i}{n}}$
-$$\omega_{dn}^{dk} = \omega_{n}^{k}$$
+Para cualesquiera $n \geq 0$, $k \geq 0$, y $d >0$, siendo $W_{n} = e^{\frac{2\pi i}{n}}$
+$$W_{dn}^{dk} =W_{n}^{k}$$
 :::
 
 :::{.proof}
 Por definición,
-$$\omega_{dn}^{dk} = (e^{\frac{2\pi i}{dn}})^{dk} = (e^{\frac{2\pi i k}{n}})^{k} = \omega_{n}^{k}$$
+$$W_{dn}^{dk} = (e^{\frac{2\pi i}{dn}})^{dk} = (e^{\frac{2\pi i k}{n}})^{k} = W_{n}^{k}$$
 :::
 
 :::{.lemma name='Lema de la mitad'}
@@ -116,16 +116,16 @@ Si $n>0$ es par, entonces los cuadrados de las $n$ raíces complejas $n$-ésimas
 :::
 
 :::{.proof}
-Por el lema de cancelación, sabemos que $(\omega_{n}^{k})^2 = \omega_{n/2}^{k}$ para todo $k$ entero positivo.  Si elevamos al cuadrado cada raíz $n$-ésima de la unidad, entonces se obtiene dos veces cada raíz $(n/2)$-ésima de la unidad, por tanto, $\omega_{n}^{k}$ y $\omega_{n}^{k+n/2}$ tienen la misma raíz.
+Por el lema de cancelación, sabemos que $(W_{n}^{k})^2 = W_{n/2}^{k}$ para todo $k$ entero positivo.  Si elevamos al cuadrado cada raíz $n$-ésima de la unidad, entonces se obtiene dos veces cada raíz $(n/2)$-ésima de la unidad, por tanto, $W_{n}^{k}$ y $W_{n}^{k+n/2}$ tienen la misma raíz.
 
-Como $\omega_{n}^{n/2} = -1$, entonces $\omega_{n}^{k+n/2} = - \omega_{n}^{k}$ y por tanto
-$(\omega_{n}^{k+n/2})^{2} = \omega_{n}^{2k}$
+Como $W_{n}^{n/2} = -1$, entonces $W_{n}^{k+n/2} = - W_{n}^{k}$ y por tanto
+$(W_{n}^{k+n/2})^{2} = W_{n}^{2k}$
 :::
 
 ### La FFT
 
-Nos encontrábamos en la situación de evaluar $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $\omega_{n}^{0}, \omega_{n}^{1},\dots,\omega_{n}^{n-1}$. Sin pérdida de generalidad, asumimos que $n$ es potencia de 2 como ya hemos alarado antes. Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,\dots,n-1$
-$$y_k = A(\omega_{n}^{k}) = \sum_{j=0}^{n-1} a_j \omega_{n}^{kj}$$.
+Nos encontrábamos en la situación de evaluar $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $W_{n}^{0}, W_{n}^{1},\dots,W_{n}^{n-1}$. Sin pérdida de generalidad, asumimos que $n$ es potencia de 2 como ya hemos alarado antes. Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,\dots,n-1$
+$$y_k = A(W_{n}^{k}) = \sum_{j=0}^{n-1} a_j W_{n}^{kj}$$.
 
 El vector $y=(y_0,y_1,\dots,y_{n-1})$ es la DFT del vector de coeficientes $a = (a_0,a_1,\dots,a_{n-1} (y=DFT_n(a))$.
 
@@ -141,7 +141,7 @@ $$A(x) = A^{[0]}(x) + x A^{[1]}(x) \label{eqn:def}$$
 
 así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad se reduce a
 
-1. evaluar los puntos $(\omega_{n}^0)^2,(\omega_{n}^1)^2,\dots,(\omega_{n}^{n-1})^2 (*)$ en los polinomios $A^{[0]}(x),  A^{[1]}(x)$.
+1. evaluar los puntos $(W_{n}^0)^2,(W_{n}^1)^2,\dots,(W_{n}^{n-1})^2 (*)$ en los polinomios $A^{[0]}(x),  A^{[1]}(x)$.
 2. combinar los resultados en la expresión $\ref{eqn:def}$.
 
 Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
@@ -152,19 +152,19 @@ Presentamos ahora el pseudocódigo del algoritmo tratado ([@introAlgorithms]).
 \newpage
 En las líneas 2-3 representa el caso base de la recursión, ya que la DFT de un elemento es él mismo.  
 
-Las líneas 6-7 definen los vectores de coeficientes para los polinomios $A^[0], A^[1]$. Las líneas 4,5 y 13 garantizan que $\omega$ se actualiza propiamente. Las líneas 8-9 lleva a cabo el cómputo de $DFN_{n/2}$. Fijando $k=0,1,\dots,n/2-1$
-$$y_k^{[0]}=A^{[0]}\omega_{n/2}^k$$
-$$y_k^{[1]}=A^{[1]}\omega_{n/2}^k$$
+Las líneas 6-7 definen los vectores de coeficientes para los polinomios $A^{[0]}, A^{[1]}$. Las líneas 4,5 y 13 garantizan que $W$ se actualiza propiamente. Las líneas 8-9 lleva a cabo el cómputo de $DFN_{n/2}$. Fijando $k=0,1,\dots,n/2-1$
+$$y_k^{[0]}=A^{[0]}W_{n/2}^k$$
+$$y_k^{[1]}=A^{[1]}W_{n/2}^k$$
 
-Dado que $\omega_{n/2}^k = \omega_n^{2k}$ por el lema de cancelación,
-$$y_k^{[0]}=A^{[0]}\omega_n^{2k}$$
-$$y_k^{[1]}=A^{[1]}\omega_n^{2k}$$
+Dado que $W_{n/2}^k = W_n^{2k}$ por el lema de cancelación,
+$$y_k^{[0]}=A^{[0]}W_n^{2k}$$
+$$y_k^{[1]}=A^{[1]}W_n^{2k}$$
 
 Líneas 11-12 combinan los resultados de los cálculos de la $DFT_{n/2}$ recursiva. Para $y_0,y_1,\dots,y_{n/2-1}$, la línea 11 asegura
-$$y_k = A(\omega_n^k)$$
+$$y_k = A(W_n^k)$$
 
 Para $y_{n/2},y_{n/2+1},\dots,y_{n-1}$, fijando $k=0,1,\dots,n/2-1$, la línea 12 asegura (debido a las propiedades de las raíces n-ésimas de la unidad enunciadas)
-$$y_{k+n/2} = A \omega_n^{k+n/2}$$
+$$y_{k+n/2} = A W_n^{k+n/2}$$
 Por tanto, el vector $y$, salida del algoritmo es la DFT del vector $a$.  
 
 Para determinar el tiempo de ejecución del procedimiento mostrado, notamos que excluyendo las llamadas recursivas, cada invocación toma un tiempo $O(n)$, donde $n$ es la longitud del vector entrada. Por tanto, la recurrencia es del orden
