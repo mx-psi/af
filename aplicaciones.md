@@ -71,3 +71,4 @@ Usando una base de datos facial 3D-RMA, Dutagaci, Sankur y Yemez ([@LA7]) han ll
 ![ Representación de esquemas y características en el reconocimiento facial](./imgs/facial2.png)
 
 ![Resultados del reconocimiento](./imgs/facial3.png)
+\newpage
