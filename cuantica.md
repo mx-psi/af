@@ -185,15 +185,15 @@ Siguiendo la notación de la [@prop:unitary] notamos para $2 \leq k \leq n$, $R_
 C1aramente $$H\ket{x_1} = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.x_1}\ket{1}),$$ ya que $e^{2 \pi 0.x_1} = (-1)^{x_1}$.
 
 Si aplicamos una puerta $R_2$-controlada ([@dfn:controlled]) respecto de $\ket{x_2}$ tenemos
-$$\operatorname{C-R}_k\ket{x_2}(H\ket{x_1}) = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.x_1x_2}\ket{1})$$
+$$\operatorname{C-R}_2\ket{x_2}(H\ket{x_1}) = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 \pi i 0.x_1x_2}\ket{1})$$
 
-Mediante la aplicación de puertas de Hadamard y puertas $R_k$-controladas podemos obtener un circuito que calcule la transformada de Fourier ([@fig:circuito]) a partir de la [@eq:binary] que necesita un total de $\frac{n(n+1)}{2} \in O(n^2)$ puertas cuánticas.
+Generalizando, mediante la aplicación de puertas de Hadamard y puertas $R_k$-controladas podemos obtener un circuito que calcule la transformada de Fourier ([@fig:circuito]) a partir de la [@eq:binary] que necesita un total de $\frac{n(n+1)}{2} \in O(n^2)$ puertas cuánticas.
 
 ![Circuito cuántico para el cálculo de la transformada cuántica de Fourier para entrada de $n$-qubits. No se incluye la reordenación de qubits final[@QFTcircuito].](imgs/Q_fourier_nqubits.png){#fig:circuito}
 
 :::
 
-Nótese que no se conoce una forma de aprovechar esta familia de circuitos para el cálculo directo de la transformada discreta de Fourier normalizada (esto es, no sabemos si la transformada discreta de Fourier es calculable en tiempo polinomial cuántico) ya que no podemos observar las amplitudes del estado cuántico.
+Nótese que no se conoce una forma de aprovechar esta familia de circuitos para el cálculo directo de la transformada discreta de Fourier normalizada (esto es, no sabemos si la transformada discreta de Fourier es calculable en tiempo cuántico $O(\log^2 N)$) ya que no podemos observar las amplitudes del estado cuántico, sólo realizar mediciones.
 
 A pesar de esta importante limitación esta familia polinomial uniforme de circuitos cuánticos puede utilizarse para el cálculo de funciones en tiempo polinomial cuántico que no conocemos que puedan ser calculadas en tiempo polinomial clásico, como es el caso de la factorización de enteros que veremos en la próxima sección.
 
@@ -346,7 +346,9 @@ Tiempo de ejecución
 Para justificar el algoritmo notamos que:
 
 1. El [@paso:ab] es calculable en tiempo $O(\log^3 N)$ mediante *exponenciación binaria*.
-2. En [@paso:cuant] utilizamos el [@lemma:orden] para obtener el orden.
+2. En [@paso:cuant] utilizamos el [@lemma:orden] para obtener el orden. 
+   Este es el único paso cuya calculabilidad en tiempo polinomial clásico es un problema abierto, 
+   aunque se conjetura que no lo es, justificando el uso de ordenadores cuánticos.
 3. La corrección del algoritmo en el último paso viene justificada por [@thm:divisores].
 4. La probabilidad de fallo viene dada por [@thm:probabilidad] que nos da error acotado.
 
