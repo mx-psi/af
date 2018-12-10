@@ -346,9 +346,8 @@ Tiempo de ejecución
 Para justificar el algoritmo notamos que:
 
 1. El [@paso:ab] es calculable en tiempo $O(\log^3 N)$ mediante *exponenciación binaria*.
-2. En [@paso:cuant] utilizamos el [@lemma:orden] para obtener el orden. 
-   Este es el único paso cuya calculabilidad en tiempo polinomial clásico es un problema abierto, 
-   aunque se conjetura que no lo es, justificando el uso de ordenadores cuánticos.
+2. En [@paso:cuant] utilizamos el [@lemma:orden] para obtener el orden.
+   Se conjetura que este paso no es calculable en tiempo polinomial clásico, justificando el uso del algoritmo cuántico.
 3. La corrección del algoritmo en el último paso viene justificada por [@thm:divisores].
 4. La probabilidad de fallo viene dada por [@thm:probabilidad] que nos da error acotado.
 
