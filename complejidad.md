@@ -4,7 +4,7 @@
 
 En esta sección inicial introducimos el concepto de complejidad de un algoritmo.
 
-El campo de la complejidad algorítmica dentro de la informática teórica intenta estudiar cuántos recursos necesita un cierto algoritmo para calcular una función. Nos centramos en la medida más común que consiste en medir la cantidad de pasos que necesita un algoritmo en el peor caso para cada tamaño de entrada.
+El campo de la complejidad algorítmica dentro de la informática teórica intenta estudiar cuántos recursos necesita un cierto algoritmo para calcular una función. Nos centramos en la medida más común, que consiste en medir la cantidad de pasos que necesita un algoritmo en el peor caso para cada tamaño de entrada.
 
 En primer lugar recordamos la definición de la notación O-grande.
 
@@ -158,21 +158,21 @@ $$y_k = A(W_{n}^{k}) = \sum_{j=0}^{n-1} a_j W_{n}^{kj}$$.
 El vector $y=(y_0,y_1,\dots,y_{n-1})$ es la DFT del vector de coeficientes $a = (a_0,a_1,\dots,a_{n-1} (y=DFT_n(a))$.
 
 Sabiendo eso, usamos FFT para computar $\operatorname{DFT}_n(a)$ en tiempo $O(n\log n)$ en vez de $O(n^2)$ con el método directo.
-La FFT utiliza un método con estrategia dívide y vencerás, de forma que separa los índices pares de los impares y define dos nuevo polinomios de grado menor o igual que $n/2$, a saber:
+La FFT utiliza un método con estrategia divide y vencerás, de forma que separa los índices pares de los impares y define dos nuevo polinomios de grado menor o igual que $n/2$, a saber:
 
 $$A^{[0]}(x) = a_0 + a_2x+ a_4x^2 + \dots + a_{n-2} x^{n/2-1},$$
 $$A^{[1]}(x) = a_1 + a_3x + a_5x^2 + \dots + a_{n-1} x^{n/2-1}.$$
 
 Se sigue que
 
-$$A(x) = A^{[0]}(x) + x A^{[1]}(x) \label{eqn:def}$$
+$$A(x) = A^{[0]}(x^2) + x A^{[1]}(x^2) \label{eqn:def}$$
 
 así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad se reduce a
 
 1. evaluar los puntos $(W_{n}^0)^2,(W_{n}^1)^2,\dots,(W_{n}^{n-1})^2 (*)$ en los polinomios $A^{[0]}(x),  A^{[1]}(x)$.
 2. combinar los resultados en la expresión $\ref{eqn:def}$.
 
-Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos si no por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos sino por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad. Por tanto, los polinomios $A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
 Presentamos ahora el pseudocódigo del algoritmo tratado ([@introAlgorithms]).
 
 ![Pseudocódigo del algoritmo](./imgs/rfft.png)

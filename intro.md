@@ -45,7 +45,7 @@ En la primera parte (secciones [Definiciones] y [Propiedades]) presentamos esta 
 
 A continuación (sección [La Transformada de Fourier rápida]) mostramos cómo calcular de forma eficiente esta transformada mediante el uso de algoritmos de *transformada de Fourier rápida* como el [Algoritmo de Cooley-Tukey] y calculamos su complejidad algorítmica.
 
-Por último vemos desarrollamos aplicaciones notables de la transformada discreta de Fourier y sus transformadas asociadas: la compresión de archivos multimedia a partir de [La transformada discreta del coseno] (la parte real de la transformada discreta de Fourier), el cálculo de [La transformada de Fourier cuántica] así como su aplicación para la resolución de forma eficiente del problema de la factorización de enteros y [Otras aplicaciones].
+Por último vemos desarrollamos aplicaciones notables de la transformada discreta de Fourier y sus transformadas asociadas: la compresión de archivos multimedia a partir de [La transformada discreta del coseno] (que maneja coeficientes reales), el cálculo de [La transformada de Fourier cuántica] así como su aplicación para la resolución de forma eficiente del problema de la factorización de enteros y [Otras aplicaciones].
 
 
 
