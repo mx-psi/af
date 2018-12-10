@@ -1,12 +1,12 @@
-# Algoritmos para la FFT
+## Algoritmos para la FFT
 
-## Algoritmo de Cooley-Tukey
+### Algoritmo de Cooley-Tukey
 
 Siguiendo la discusión anterior sobre la complejidad algorítmica de FFT, llegamos al algoritmo más representativo para la FFT. El algoritmo de Cooley-Tukey (en honor a J.W. Cooley y John Tukey) es recursivo y fue inventado alrededor de 1805 por Carl Friedrich Gauss en el intento de interpolar las trayectorias de los asteroides Pallas y Juno. Sin embargo, Gauss no analizó la complejidad asintótica del algoritmo. Serían James Cooley de IBM y John Tukey de Princeton quienes, en 1965, publicaron un artículo reinventando el algoritmo y describiendo como ponerlo en funcionamiento en un ordenador.
 
 ### Algoritmo Radio-2 DIT
 
-Es la forma más simple y común del algoeritmo de Cooley-Tukey. Radio-2 DIT descompone un secuencia de N puntos (N potencia de 2) en dos secuencias de longitud N/2 y se obtiene la DFT de los N puntos en términos de las DFTs de las dos subsecuencias. Este proceso se repite recursivamente hasta que se obtienen secuencias de sólamente dos puntos. Aquí se muestra un ejemplo de particionado ([@fft-algo]):
+Es la forma más simple y común del algoritmo de Cooley-Tukey. Radio-2 DIT descompone un secuencia de N puntos (N potencia de 2) en dos secuencias de longitud N/2 y se obtiene la DFT de los N puntos en términos de las DFTs de las dos subsecuencias. Este proceso se repite recursivamente hasta que se obtienen secuencias de sólamente dos puntos. Aquí se muestra un ejemplo de particionado ([@fft-algo]):
 
 ![Pequeña visualización del particionado](./imgs/radix-2DIT.png)
 
@@ -22,7 +22,7 @@ $$X^F(k) = \sum_{r=0}^{N/2-1} x(2r) (W_{N}^{2})^{rk} +  W_{N}^k\sum_{r=0}^{N/2-1
 
 Aquí $X^F(K)$ los N puntos de la DFT de $x(n)$ es expresada en términos de DFTs de N/2 puntos, $G^F(k)$ y $H^F(k)$, que son las DFTs de las instancias pares e impares de $x(n)$ respectivamente.
 
-$X^F(k):$ es periódica con perido N ($X^F(k) = X^F(k+N)$
+$X^F(k):$ es periódica con periodo N ($X^F(k) = X^F(k+N)$
 $G^F(k), H^F(k):$ periódicas con periodo N/2.
 
 $$X^F(k) = G^F(k) +  W_N^kH^F(k) \hspace{1cm} k=0,1,..,N/2 -1  \hspace{1cm} (a)$$

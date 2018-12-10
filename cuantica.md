@@ -14,7 +14,7 @@ La aplicación más conocida de la transformada de Fourier cuántica es el algor
 
 El modelo habitual de ordenadores cuánticos viene dado por un sistema cuántico aislado en el que se permiten algunas operaciones básicas dadas por transformaciones unitarias. En esta sección describimos los principios de mecánica cuántica que utilizamos para definir nuestro modelo.
 
-La implementación concreta de los ordenadores cuánticos requiere de un proceso de corrección de errores ya que los sistemas cuánticos no son aislados. Existen resultados que nos garantizan que podemos realizar esa corrección de errores de forma eficiente si el ruido del sistema no supera un cierto umbral[@fowler2009high].
+La implementación concreta de los ordenadores cuánticos requiere de un proceso de corrección de errores ya que los sistemas cuánticos no son aislados. Existen resultados que nos garantizan que podemos realizar esa corrección de errores de forma eficiente si el ruido del sistema no supera un cierto umbral y podemos suponer sin pérdida de generalidad por tanto que el sistema es aislado [@fowler2009high].
 
 ### Espacio de estados
 
@@ -97,7 +97,7 @@ Las siguientes operaciones son unitarias:
 $$R_\theta = \left(\begin{matrix}1 & 0 \\ 0 & e^{i\theta}\end{matrix}\right), \qquad R_\theta\ket{0} = 0, \quad R_\theta\ket{1} = e^{i\theta}\ket{1}$$
 :::
 :::{.proof}
-Es trivial comprobando que el producto de la expresión matricial por su adjunta conjugada da la identidad.
+Basta comprobar en cada caso que el producto de la expresión matricial por su adjunta conjugada da la identidad.
 :::
 
 Además, a partir de estas operaciones podemos construir otras nuevas operaciones unitarias.
@@ -144,7 +144,7 @@ La constante $\frac23$ es arbitraria; dada una familia de circuitos cuánticos q
 Por último nos restringimos a familias de circuitos cuánticos que podamos calcular eficientemente.
 
 :::{.definition}
-Una *familia polinomial uniforme de circuitos cuánticos* es una sucesión de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ tal que existe un algoritmo de complejidad polinomial en $n$ que calcula dado $n \in \mathbb{N}$ una descripción de $C_n$.
+Una *familia polinomial uniforme de circuitos cuánticos* es una sucesión de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ calculable en tiempo polinomial (clásico).
 
 Una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ es *calculable en tiempo polinomial cuántico* si es calculable con error acotado por una familia polinomial uniforme de circuitos cuánticos.
 :::
@@ -189,7 +189,7 @@ $$\operatorname{C-R}_k\ket{x_2}(H\ket{x_1}) = \frac{1}{\sqrt{2}}(\ket{0} + e^{2 
 
 Mediante la aplicación de puertas de Hadamard y puertas $R_k$-controladas podemos obtener un circuito que calcule la transformada de Fourier ([@fig:circuito]) a partir de la [@eq:binary] que necesita un total de $\frac{n(n+1)}{2} \in O(n^2)$ puertas cuánticas.
 
-![Circuito cuántico para el cálculo de la transformada cuántica de Fourier para entrada de $n$-qubits. No se incluyen la reordenación de qubits final[@QFTcircuito].](imgs/Q_fourier_nqubits.png){#fig:circuito}
+![Circuito cuántico para el cálculo de la transformada cuántica de Fourier para entrada de $n$-qubits. No se incluye la reordenación de qubits final[@QFTcircuito].](imgs/Q_fourier_nqubits.png){#fig:circuito}
 
 :::
 

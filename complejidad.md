@@ -28,7 +28,7 @@ Un algoritmo (clásico) *calcula $f$ en tiempo* $O(T(n))$ si, la función que as
 Un algoritmo (clásico) *calcula $f$ en tiempo polinómico (clásico)* si lo calcula en tiempo $O(T(n))$ con $T$ un polinomio.
 :::
 
-Para aplicar con rigor la [@dfn:calcu] es necesario proporcionar una representación de la entrada y salida como palabras en el alfabeto $\{0,1\}$. En los casos en los que esta representación esté omitida la eficiencia de algoritmo será independiente de tal representación.
+Para aplicar con rigor la [@dfn:calcu] es necesario proporcionar una representación de la entrada y salida como palabras en el alfabeto $\{0,1\}$ pero, en general, omitimos este paso por brevedad. Para los problemas considerados la representación escogida proporciona la misma complejidad asintótica salvo factor polinómico.
 
 ## Representación de polinomios
 
