@@ -1,10 +1,38 @@
-# Complejidad asintótica
+# La Transformada de Fourier rápida
 
-## Introducción. Representación de polinomios: Representación mediante coeficientes y representación punto-valor
+## Complejidad algorítmica
+
+En esta sección inicial introducimos el concepto de complejidad de un algoritmo.
+
+El campo de la complejidad algorítmica dentro de la informática teórica intenta estudiar cuántos recursos necesita un cierto algoritmo para calcular una función. Nos centramos en la medida más común que consiste en medir la cantidad de pasos que necesita un algoritmo en el peor caso para cada tamaño de entrada.
+
+En primer lugar recordamos la definición de la notación O-grande.
+
+:::{.definition}
+Sea $T : \mathbb{N} \to \mathbb{N}$,
+
+$T(n)$ es $O(f(n)) \Leftrightarrow \exists c \in \mathbb{R}, \exists n_0 \in \mathbb{N}$, tal que $\forall n \geq n_0, T(n) \leq c f(n)$
+:::
+
+A continuación describimos el concepto de calculabilidad en tiempo $O(f(n))$ (clásico) de una función.
+En general nos restringimos a funciones con dominio y codominio formado por palabras (vectores) en el alfabeto $\{0,1\}$, esto es, sobre
+$$\{0,1\}^\ast = \bigcup_{n \in \mathbb{N}\cup \{0\}} \{x_1 \dots x_n \;:\; x_i \in \{0,1\}\}$$
+Dada una palabra $x \in \{0,1\}^\ast$ decimos que su longitud es $n$, notado $|x| = n$, si $x = x_1 \dots x_n$.
+
+Así llegamos a la siguiente definición:
+
+:::{.definition #dfn:calcu}
+Sea $f: \{0,1\}^\ast \to \{0,1\}^\ast$, $T: \mathbb{N} \to \mathbb{N}$. 
+Un algoritmo (clásico) *calcula $f$ en tiempo* $O(T(n))$ si, la función que asocia a cada $n$ el máximo número de pasos que toma el algoritmo para calcular $f(x)$ con $|x| = n$ es $O(T(n))$.
+
+Un algoritmo (clásico) *calcula $f$ en tiempo polinómico (clásico)* si lo calcula en tiempo $O(T(n))$ con $T$ un polinomio.
+:::
+
+Para aplicar con rigor la [@dfn:calcu] es necesario proporcionar una representación de la entrada y salida como palabras en el alfabeto $\{0,1\}$. En los casos en los que esta representación esté omitida la eficiencia de algoritmo será independiente de tal representación.
+
+## Representación de polinomios
 
 En esta pequeña introducción se presentan dos formas de representar polinomios: por medio de sus coeficientes y por parejas punto-valor (un punto y su evaluación en el polinomio). Atacaremos el problema de multiplicar polinomios de grado acotado por $n$, consiguiendo, a través de FFT, un algoritmo de orden $O(n \log n)$. El contenido está basado en el capítulo 30 de [@introAlgorithms].
-
-**Nota:** $T(n)$ es $O(f(n)) \Leftrightarrow \exists c \in \mathbb{R}, \exists n_0 \in \mathbb{N}$, tal que $\forall n \geq n_0, T(n) \leq c f(n)$
 
 ### Representación mediante coeficientes
 
