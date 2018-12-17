@@ -14,4 +14,5 @@ colorlinks: true
 toc: true
 header-includes:
 - \newcommand{\ket}[1]{\left|#1\right\rangle}
+- \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 ---
