@@ -77,3 +77,69 @@ $$\centering{\Rightarrow \textbf{Representación punto-valor extendida}}$$
 ## Multiplicación rápida de polinomios en forma de coeficientes
 
 ¿Es posible utilizar el método de multiplicación de polinomios en su forma punto-valor (tiempo lineal) para acelerar la multiplicación a través de los coeficientes? $\Leftrightarrow$ **Evaluar e interpolar polinomios rápidamente.**
+
+- Cualquier conjunto de puntos es válido para evaluar.
+- Si se escogen cuidadosamente podríamos pasar de una representación a otra en tiempo $O(n\log n)$
+- Si tomamos las raíces complejas de la unidad, podemos generar la representación punto valor con la DFT de un polinomio dado por sus coeficientes  
+- FFT llevará a cabo la DFT y la DFT inversa en tiempo $O(n\log n)$
+
+## Multiplicación rápida: Procedimiento de la FFT ($O(n\log n)$)
+
+
+Si $A(x), B(x)$ polinomios de grado menor o igual que $n$ en su representación por coeficientes, $n$ es potencia de 2, los multiplicamos:
+
+1. Extendiendo al doble el grado
+2. Evaluación
+3. Multiplicación
+4. Interpolación
+
+(1) y (3) son $O(n)$; (2) y (4) son de orden $O(n\log n)$. Por tanto, tras mostrar cómo usar la FFT, habremos probado lo siguiente:
+
+## Multiplicación rápida: Procedimiento de la FFT ($O(n\log n)$)
+
+:::{.theorem #thm:FFT}
+El producto de dos polinomios de grado menor o igual que n representados por sus coeficientes puede ser computado en un tiempo $O(n\log n)$ y la salida vendrá representada por sus coeficientes.
+:::
+
+## Complejidad de la FFT: Evaluación e interpolación
+
+### Raíces complejas de la unidad
+
+Una raíz n-ésima de la únidad es un número $W$ tal que
+$$W^n = 1$$
+Hay exactamente $n$ raíces complejas n-ésimas de la unidad: $e^{\frac{2\pi i k}{n}}. k = 0,1,\dots,n-1$
+
+:::{.lemma name='Lema de cancelación'}
+Para cualesquiera $n \geq 0$, $k \geq 0$, y $d >0$, siendo $W_{n} = e^{\frac{2\pi i}{n}}$
+$$W_{dn}^{dk} =W_{n}^{k}$$
+:::
+
+:::{.lemma name='Lema de la mitad'}
+Si $n>0$ es par, entonces los cuadrados de las $n$ raíces complejas $n$-ésimas de la unidad son las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+:::
+
+## FFT
+
+- Evaluamos $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $W_{n}^{0}, W_{n}^{1},\dots,W_{n}^{n-1}$
+- Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,\dots,n-1$
+$$y_k = A(W_{n}^{k}) = \sum_{j=0}^{n-1} a_j W_{n}^{kj}$$.
+- El vector $y=(y_0,y_1,\dots,y_{n-1})$ es la DFT del vector de coeficientes $a = (a_0,a_1,\dots,a_{n-1}) (y=DFT_n(a))$.
+- **Estrategia divide y vencerás**
+
+$$A^{[0]}(x) = a_0 + a_2x+ a_4x^2 + \dots + a_{n-2} x^{n/2-1},$$
+$$A^{[1]}(x) = a_1 + a_3x + a_5x^2 + \dots + a_{n-1} x^{n/2-1}.$$
+
+## FFT
+
+$$A(x) = A^{[0]}(x^2) + x A^{[1]}(x^2) \label{eqn:def}$$
+así que el problema de evaluar A(x) en las $n$ raíces $n$-ésimas de la unidad se reduce a
+
+1. evaluar los puntos $(W_{n}^0)^2,(W_{n}^1)^2,\dots,(W_{n}^{n-1})^2 (*)$ en los polinomios $A^{[0]}(x),  A^{[1]}(x)$.
+2. combinar los resultados en la expresión $\ref{eqn:def}$.
+
+Por el lema de la mitad, las raíces (*) no están formadas por $n$ valores distintos sino por las $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+$\Rightarrow A^{[0]}(x)$ y $A^{[1]}(x)$ están evaluando recursivamente las  $(n/2)$ raíces complejas $(n/2)$-ésimas de la unidad.
+
+## FFT
+
+![Pseudocódigo del algoritmo](./imgs/rfft.png)
