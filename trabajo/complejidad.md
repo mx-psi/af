@@ -22,7 +22,7 @@ Dada una palabra $x \in \{0,1\}^\ast$ decimos que su longitud es $n$, notado $|x
 Así llegamos a la siguiente definición:
 
 :::{.definition #dfn:calcu}
-Sea $f: \{0,1\}^\ast \to \{0,1\}^\ast$, $T: \mathbb{N} \to \mathbb{N}$. 
+Sea $f: \{0,1\}^\ast \to \{0,1\}^\ast$, $T: \mathbb{N} \to \mathbb{N}$.
 Un algoritmo (clásico) *calcula $f$ en tiempo* $O(T(n))$ si, la función que asocia a cada $n$ el máximo número de pasos que toma el algoritmo para calcular $f(x)$ con $|x| = n$ es $O(T(n))$.
 
 Un algoritmo (clásico) *calcula $f$ en tiempo polinómico (clásico)* si lo calcula en tiempo $O(T(n))$ con $T$ un polinomio.
@@ -152,10 +152,10 @@ $(W_{n}^{k+n/2})^{2} = W_{n}^{2k}$
 
 ### La FFT
 
-Nos encontrábamos en la situación de evaluar $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $W_{n}^{0}, W_{n}^{1},\dots,W_{n}^{n-1}$. Sin pérdida de generalidad, asumimos que $n$ es potencia de 2 como ya hemos alarado antes. Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,\dots,n-1$
+Nos encontrábamos en la situación de evaluar $A(x) = \sum_{j=0}^{n-1} a_j x^j$ en los puntos $W_{n}^{0}, W_{n}^{1},\dots,W_{n}^{n-1}$. Sin pérdida de generalidad, asumimos que $n$ es potencia de 2 como ya hemos aclarado antes. Dado A en su representación por coeficientes, calculamos, para cada $k=0,1,\dots,n-1$
 $$y_k = A(W_{n}^{k}) = \sum_{j=0}^{n-1} a_j W_{n}^{kj}$$.
 
-El vector $y=(y_0,y_1,\dots,y_{n-1})$ es la DFT del vector de coeficientes $a = (a_0,a_1,\dots,a_{n-1} (y=DFT_n(a))$.
+El vector $y=(y_0,y_1,\dots,y_{n-1})$ es la DFT del vector de coeficientes $a = (a_0,a_1,\dots,a_{n-1}) (y=DFT_n(a))$.
 
 Sabiendo eso, usamos FFT para computar $\operatorname{DFT}_n(a)$ en tiempo $O(n\log n)$ en vez de $O(n^2)$ con el método directo.
 La FFT utiliza un método con estrategia divide y vencerás, de forma que separa los índices pares de los impares y define dos nuevo polinomios de grado menor o igual que $n/2$, a saber:
