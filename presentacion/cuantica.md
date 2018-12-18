@@ -7,7 +7,8 @@ El espacio de estados de un sistema cuántico está formado por los *rayos* de u
 
 :::{.example}
 Un **qubit** es un sistema cuántico asociado a un espacio de Hilbert $Q$ con $\dim Q = 2$ y una base ortonormal fijada $\ket{0},\ket{1}$. Representamos sus estados como
-$$\ket{\psi} = \alpha \ket{0} + \beta \ket{1} \in Q \text{ con } \norm{\ket{\psi}} = |\alpha|^2 + |\beta|^2 = 1.$$
+$$\ket{\psi} = \alpha \ket{0} + \beta \ket{1} \in Q \text{ con } \norm{\ket{\psi}} = |\alpha|^2 + |\beta|^2 = 1$$
+$\alpha$ y $\beta$ son las **amplitudes** de $\ket{\psi}$.
 :::
 
 ---
@@ -40,32 +41,61 @@ $U$-controlada
 
 Una medición de un sistema cuántico de dimensión $N = 2^n$ con vector de estado 
 $$\ket{\psi} = \sum_{i = 0}^{N-1} \alpha_i\ket{i}$$ 
-respecto de la base usual es una variable aleatoria discreta $X: \Omega \to \{\ket{0},\dots, \ket{n-1}\}$ tal que $$P(X = \ket{i}) = |\alpha_i|^2 \quad ( i = 0, \dots, N-1)$$
+respecto de la base usual es una variable aleatoria discreta $\operatorname{Med}\ket{\psi}: \Omega \to \{\ket{0},\dots, \ket{n-1}\}$ tal que $$P(\operatorname{Med}\ket{\psi} = \ket{i}) = |\alpha_i|^2 \quad ( i = 0, \dots, N-1)$$
 
 ## Modelo de circuitos
 
 :::{.definition}
-Un *circuito cuántico $C$ con $n$ entradas* es una sucesión finita $\{(P_j, (i^{(j)}_1,i^{(j)}_2, i^{(j)}_3)\}_{j = 1,\dots, k}$ de pares de operaciones cuánticas sobre 3 qubits e índices $i^{(j)}_l \in \{1,\dots,n\}$.
+Un *circuito cuántico $C$ con $n$ entradas* es una sucesión finita $\{(P_j, (i^{(j)}_l)_{l = 1,2,3})\}_{j = 1,\dots, k}$ de pares de operaciones cuánticas sobre 3 qubits e índices $i^{(j)}_l \in \{1,\dots,n\}$.
 
-Dado $C$ y $\ket{\psi} \in Q^{\otimes n}$, $C\ket{\psi}$ es el resultado de medir la salida de $C$ tras aplicar ordenadamente para $j = 1\dots k$ la puerta cuántica $P_j$ sobre los qubits $(i^{(j)}_1,i^{(j)}_2, i^{(j)}_3)$.
-:::
-
----
-
-:::{.definition}
-Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $p(n) + n$ entradas *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ se tiene que
-$$P\left[C_n\left(\ket{x}\ket{0}^{\otimes p(n)}\right) = f(x)\ket{\psi}\right] \geq \frac23$$
+Dado $\ket{\psi} \in Q^{\otimes n}$, $C(\ket{\psi})$ es el resultado de aplicar ordenadamente para $j = 1\dots k$ la puerta cuántica $P_j$ sobre los qubits $i^{(j)}_l$ de $\ket{\psi}$.
 :::
 
 . . .
 
 :::{.definition}
-Una *familia polinomial uniforme de circuitos cuánticos* es una sucesión de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ que es calculable en tiempo polinomial (clásico).
-
-Una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ es *calculable en tiempo polinomial cuántico* si es calculable con error acotado por una familia polinomial uniforme de circuitos cuánticos.
+Una *familia polinomial uniforme de circuitos cuánticos* es una sucesión de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $n$ entradas que es calculable en tiempo polinomial (clásico).
 :::
 
 
 ## QFT
+
+La transformada discreta de Fourier normalizada puede calcularse de forma eficiente en ordenadores cuánticos.
+
+:::{.theorem}
+Existe una familia polinomial uniforme de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ tales que:
+
+> Si $\ket{\psi} \in Q^{\otimes n}$ tiene vector de amplitudes $x \in \mathbb{C}^{N}$ entonces $C_n(\ket{\psi})$ tiene vector de amplitudes $\operatorname{UFT}(x)$.
+:::
+
+. . .
+
+En concreto veremos que $C_n$ tiene $O(n^2) = O(\log^2 N)$ puertas cuánticas, lo que mejora la eficiencia clásica $O(N \log N)$.
+
+## Calculabilidad en tiempo cuántico
+
+:::{.definition}
+Una familia de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ *calcula con error acotado* una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ si para todo $x \in \{0,1\}^\ast$ con longitud $|x| = n \in \mathbb{N}$ existe $y \in \{0,1\}^\ast$ tal que
+$$P\left[\operatorname{Med}C_{n+p(n)}\left(\ket{x}\ket{0}^{\otimes p(n)}\right) = f(x)y\right] \geq \frac23$$
+:::
+
+:::{.definition}
+Una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ es *calculable en tiempo polinomial cuántico* si es calculable con error acotado por una familia polinomial uniforme de circuitos cuánticos.
+:::
+
 ## Estimación de fase
-## Algoritmo de Shor
+
+## Cálculo del periodo
+
+Dado $N \in \mathbb{Z}$ podemos representarlo como palabra en $\{0,1\}^\ast$ como su representación binaria, de longitud $O(\log N)$.
+
+. . .
+
+:::{.theorem}
+Sean $N$ entero y $x \in U(\mathbb{Z}_N)$.
+El orden de $x$ en el grupo $U(\mathbb{Z}_N)$ es calculable en tiempo polinomial cuántico (TODO).
+:::
+
+. . .
+
+¿Es calculable en tiempo polinomial clásico?
