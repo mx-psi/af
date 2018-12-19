@@ -51,8 +51,6 @@ Un *circuito cuántico $C$ con $n$ entradas* es una sucesión finita $\{(P_j, (i
 Dado $\ket{\psi} \in Q^{\otimes n}$, $C(\ket{\psi})$ es el resultado de aplicar ordenadamente para $j = 1\dots k$ la puerta cuántica $P_j$ sobre los qubits $i^{(j)}_l$ de $\ket{\psi}$.
 :::
 
-. . .
-
 :::{.definition}
 Una *familia polinomial uniforme de circuitos cuánticos* es una sucesión de circuitos cuánticos $\{C_n\}_{n \in \mathbb{N}}$ donde $C_n$ tiene $n$ entradas que es calculable en tiempo polinomial (clásico).
 :::
@@ -68,9 +66,16 @@ Existe una familia polinomial uniforme de circuitos cuánticos $\{C_n\}_{n \in \
 > Si $\ket{\psi} \in Q^{\otimes n}$ tiene vector de amplitudes $x \in \mathbb{C}^{N}$ entonces $C_n(\ket{\psi})$ tiene vector de amplitudes $\operatorname{UFT}(x)$.
 :::
 
-. . .
+En concreto $C_n$ tiene $O(n^2) = O(\log^2 N)$ puertas cuánticas, lo que mejora la eficiencia clásica $O(N \log N)$.
 
-En concreto veremos que $C_n$ tiene $O(n^2) = O(\log^2 N)$ puertas cuánticas, lo que mejora la eficiencia clásica $O(N \log N)$.
+---
+
+:::{.proof}
+Usamos que la transformada de Fourier discreta normalizada puede verse como la función
+$$\ket{j_1 \dots j_n} \mapsto \frac{1}{\sqrt{2^n}} \left(\ket{0} + e^{2\pi i 0\text{.}j_n}\ket{1}\right)\dots\relax \left(\ket{0} + e^{2\pi i 0\text{.}j_1\dots j_n}\ket{1}\right)$$
+
+![Circuito cuántico para QFT](imgs/qft.png)
+:::
 
 ## Calculabilidad en tiempo cuántico
 
@@ -84,18 +89,49 @@ Una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ es *calculable en tiempo polinom
 :::
 
 ## Estimación de fase
+:::{.lemma #lemma:phase}
+Sea $U$ una transformación unitaria con un valor propio $e^{2 \pi i\varphi}$ asociado al vector $\ket{u}$.
+Si $U$ y $\ket{u}$ son calculables en tiempo polinomial cuántico, una aproximación de $n$-bits de $\varphi$ con error $\varepsilon > 0$ es calculable en tiempo polinomial cuántico ($O(n^2/\varepsilon))$.
+:::
+
+. . .
+
+### Esbozo de algoritmo
+
+1. El estado inicial es $\ket{0}^{\otimes t} \ket{u}$ ($t = n + \lceil \log(2 + \frac{1}{2\varepsilon})\rceil$),
+2. Aplicamos $H$ a los $t$ primeros qubits $\displaystyle\frac{1}{\sqrt{2^t}}\sum_{j = 0}^{2^t - 1} \ket{j} \ket{u}$
+3. Aplicamos $U^{2^j}$-controlada $\displaystyle\frac{1}{\sqrt{2^t}}\sum_{j = 0}^{2^t - 1} e^{2\pi i j \varphi_u}\ket{j} \ket{u},$
+4. Aplicamos QFT$^{-1}$, obteniendo una aproximación de $\varphi_u$, $\ket{\overset{\sim}{\varphi}} \ket{u}$
+
+---
+
+### Corrección en el caso exacto
+
+Supongamos que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tiene exactamente $n$ bits ($t = n$).
+En el paso 3 podemos reescribir lo que obtenemos como:
+$$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2\pi i 0.\varphi_n}\ket{1}\right)\dots\relax \left(\ket{0} + e^{2\pi i 0.\varphi_1\dots \varphi_n}\ket{1}\right)$$
+
+Utilizando la expresión de QFT vemos que tras aplicar QFT$^{-1}$ es exactamente $\ket{\varphi_1 \dots \varphi_n}$.
 
 ## Cálculo del periodo
 
 Dado $N \in \mathbb{Z}$ podemos representarlo como palabra en $\{0,1\}^\ast$ como su representación binaria, de longitud $O(\log N)$.
 
-. . .
-
 :::{.theorem}
 Sean $N$ entero y $x \in U(\mathbb{Z}_N)$.
-El orden de $x$ en el grupo $U(\mathbb{Z}_N)$ es calculable en tiempo polinomial cuántico (TODO).
+El orden de $x$ en el grupo $U(\mathbb{Z}_N)$ es calculable en tiempo polinomial cuántico.
 :::
 
-. . .
-
 ¿Es calculable en tiempo polinomial clásico?
+
+---
+
+### Esbozo de demostración
+
+Consideramos $U\ket{j}\ket{k} = \ket{j}\ket{x^jk \mod N}$. Tenemos que, si $r = \operatorname{ord}(x)$, $$\ket{u_s} = \frac{1}{\sqrt{r}} \sum_{k = 0}^{r-1} \exp\left(\frac{-2\pi i s k}{r}\right)\ket{x^k \mod N}$$ entonces $U\ket{u_s} = \exp(2\pi i s/r)$.
+
+Notamos que:
+$$\frac{1}{\sqrt{r}} \sum_{s = 0}^{r-1} \ket{u_s} = \ket{1}$$
+
+Aplicamos el algoritmo de estimación de fase con estado inicial $\ket{1}$.
+Obtendremos una aproximación a $s/r$, de la que podemos calcular $r$.
