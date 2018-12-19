@@ -3,7 +3,7 @@
 ## Espacio de estados
 
 
-El espacio de estados de un sistema cuántico está formado por los *rayos* de un espacio de Hilbert separable complejo. Tomamos vectores unitarios.
+El espacio de estados de un sistema cuántico está formado por las rectas de un espacio de Hilbert separable complejo. Las representamos con vectores unitarios.
 
 :::{.example}
 Un **qubit** es un sistema cuántico asociado a un espacio de Hilbert $Q$ con $\dim Q = 2$ y una base ortonormal fijada $\ket{0},\ket{1}$. Representamos sus estados como
@@ -32,7 +32,7 @@ Hadamard
 : $$H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}) \quad H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$$
 
 Cambio de fase
-: $$R_\theta\ket{0} = 0, \quad R_\theta\ket{1} = e^{i\theta}\ket{1}$$
+: $$R_\theta\ket{0} = \ket{0}, \quad R_\theta\ket{1} = e^{i\theta}\ket{1}$$
 
 $U$-controlada
 : Si $U$ es unitaria $$C_U\ket{c}\ket{x} = \ket{c}U^c\ket{x}$$ es unitaria.
@@ -41,7 +41,7 @@ $U$-controlada
 
 Una medición de un sistema cuántico de dimensión $N = 2^n$ con vector de estado 
 $$\ket{\psi} = \sum_{i = 0}^{N-1} \alpha_i\ket{i}$$ 
-respecto de la base usual es una variable aleatoria discreta $\operatorname{Med}\ket{\psi}: \Omega \to \{\ket{0},\dots, \ket{n-1}\}$ tal que $$P(\operatorname{Med}\ket{\psi} = \ket{i}) = |\alpha_i|^2 \quad ( i = 0, \dots, N-1)$$
+respecto de la base usual es una variable aleatoria discreta $\operatorname{Med}\ket{\psi}: \Omega \to \{0,1\}^n$ tal que $$P(\operatorname{Med}\ket{\psi} = i) = |\alpha_i|^2 \quad ( i = 0, \dots, N-1)$$
 
 ## Modelo de circuitos
 
@@ -91,7 +91,7 @@ Una función $f: \{0,1\}^\ast \to \{0,1\}^\ast$ es *calculable en tiempo polinom
 ## Estimación de fase
 :::{.lemma #lemma:phase}
 Sea $U$ una transformación unitaria con un valor propio $e^{2 \pi i\varphi}$ asociado al vector $\ket{u}$.
-Si $U$ y $\ket{u}$ son calculables en tiempo polinomial cuántico, una aproximación de $n$-bits de $\varphi$ con error $\varepsilon > 0$ es calculable en tiempo polinomial cuántico ($O(n^2/\varepsilon))$.
+Si $U$ y $\ket{u}$ son calculables en tiempo polinomial cuántico, una aproximación de $n$-bits de $\varphi$ con error $\varepsilon > 0$ es calculable en tiempo polinomial cuántico ($O(n^2))$.
 :::
 
 . . .
@@ -100,16 +100,16 @@ Si $U$ y $\ket{u}$ son calculables en tiempo polinomial cuántico, una aproximac
 
 1. El estado inicial es $\ket{0}^{\otimes t} \ket{u}$ ($t = n + \lceil \log(2 + \frac{1}{2\varepsilon})\rceil$),
 2. Aplicamos $H$ a los $t$ primeros qubits $\displaystyle\frac{1}{\sqrt{2^t}}\sum_{j = 0}^{2^t - 1} \ket{j} \ket{u}$
-3. Aplicamos $U^{2^j}$-controlada $\displaystyle\frac{1}{\sqrt{2^t}}\sum_{j = 0}^{2^t - 1} e^{2\pi i j \varphi_u}\ket{j} \ket{u},$
-4. Aplicamos QFT$^{-1}$, obteniendo una aproximación de $\varphi_u$, $\ket{\overset{\sim}{\varphi}} \ket{u}$
+3. Aplicamos $U^{2^j}$-controlada por el qubit $j$: $\displaystyle\frac{1}{\sqrt{2^t}}\sum_{j = 0}^{2^t - 1} e^{2\pi i j \varphi_u}\ket{j} \ket{u},$
+4. Aplicamos QFT$^{-1}$, obteniendo una aproximación de $\varphi$, $\ket{\overset{\sim}{\varphi}} \ket{u}$
 
 ---
 
 ### Corrección en el caso exacto
 
-Supongamos que $\varphi_u = 0.\varphi_1\dots \varphi_n$ tiene exactamente $n$ bits ($t = n$).
+Supongamos que $\varphi = 0\text{.}\varphi_1\dots \varphi_n$ tiene exactamente $n$ bits ($t = n$).
 En el paso 3 podemos reescribir lo que obtenemos como:
-$$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2\pi i 0.\varphi_n}\ket{1}\right)\dots\relax \left(\ket{0} + e^{2\pi i 0.\varphi_1\dots \varphi_n}\ket{1}\right)$$
+$$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2\pi i 0\text{.}\varphi_n}\ket{1}\right)\dots\relax \left(\ket{0} + e^{2\pi i 0\text{.}\varphi_1\dots \varphi_n}\ket{1}\right)$$
 
 Utilizando la expresión de QFT vemos que tras aplicar QFT$^{-1}$ es exactamente $\ket{\varphi_1 \dots \varphi_n}$.
 
