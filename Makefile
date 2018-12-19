@@ -7,7 +7,7 @@ DOC_SECTIONS:=intro.md definiciones.md propiedades.md complejidad.md algoritmosF
 DOC_SRCS:= $(foreach section, $(DOC_SECTIONS), $(DOC_FOLDER)/$(section))
 
 PR_FOLDER:=./presentacion
-PR_SECTIONS:=intro.md complejidad.md cuantica.md
+PR_SECTIONS:=intro.md complejidad.md algoritmosFFT.md cuantica.md
 PR_SRCS:= $(foreach section, $(PR_SECTIONS), $(PR_FOLDER)/$(section))
 
 PDFS:=trabajo.pdf presentacion.pdf
