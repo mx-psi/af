@@ -18,7 +18,7 @@ $$\langle \{x\}, \{y\}\rangle = \frac{1}{N} \langle \{X\}, \{Y\}\rangle.$$
 
 :::{.corollary name="Teorema de Plancherel"}
 Se verifica
-$$\|\{x\}\|_2 = \frac{1}{N} \|\{X\}\|_2.$$
+$$\|\{x\}\|_2 = \frac{1}{\sqrt{N}} \|\{X\}\|_2.$$
 :::
 
 :::{.corollary #cor:isometries}

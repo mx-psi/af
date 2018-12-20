@@ -52,7 +52,7 @@ $$\begin{split}
 
 :::{.corollary #cor:plancherel name="Teorema de Plancherel"}
 Se verifica
-$$\|\{x\}\|_2 = \frac{1}{N} \|\{X\}\|_2.$$
+$$\|\{x\}\|_2 = \frac{1}{\sqrt{N}} \|\{X\}\|_2.$$
 :::
 
 :::{.proof}
